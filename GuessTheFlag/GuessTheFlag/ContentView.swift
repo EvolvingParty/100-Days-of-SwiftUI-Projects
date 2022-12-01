@@ -7,6 +7,30 @@
 
 import SwiftUI
 
+struct LargeBlueFont: ViewModifier {
+    func body(content: Content) -> some View {
+        content
+            .foregroundColor(.blue)
+            .font(.system(.largeTitle, design: .rounded).weight(.bold))
+    }
+}
+
+extension View {
+    func prominentTitle() -> some View {
+        modifier(LargeBlueFont())
+    }
+}
+
+struct FlagImage: View {
+    var country: String
+    var body: some View {
+        Image(country)
+            .renderingMode(.original)
+            .clipShape(Capsule())
+            .shadow(radius: 5)
+    }
+}
+
 struct ContentView: View {
     @State private var showingScore = false
     @State private var scoreTitle = ""
@@ -38,18 +62,16 @@ struct ContentView: View {
                             .foregroundStyle(.secondary)
                             .font(.system(.title2, design: .rounded).weight(.semibold))
                         Text(countries[correctAnswer])
-                            .foregroundColor(.primary)
-                            .font(.system(.largeTitle, design: .rounded).weight(.bold))
+                            //.foregroundColor(.primary)
+                            //.font(.system(.largeTitle, design: .rounded).weight(.bold))
+                            .prominentTitle()
                     }
                     
                     ForEach(0..<3) { number in
                         Button {
                             flagTapped(number)
                         } label: {
-                            Image(countries[number])
-                                .renderingMode(.original)
-                                .clipShape(Capsule())
-                                .shadow(radius: 5)
+                            FlagImage(country: countries[number])
                         }
                     }
                 }
@@ -61,10 +83,6 @@ struct ContentView: View {
                 Spacer()
                 Spacer()
                 
-                Text("Round: \(currentQuestion)")
-                    .foregroundColor(.white)
-                    .font(.largeTitle.bold())
-                    .padding(.top, 20)
                 Text("Score: \(currentScore)")
                     .foregroundColor(.white)
                     .font(.largeTitle.bold())
