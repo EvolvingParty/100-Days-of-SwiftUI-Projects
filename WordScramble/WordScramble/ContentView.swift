@@ -2,12 +2,14 @@
 //  ContentView.swift
 //  WordScramble
 //
-//  Created by Kurt Lane on 6/12/2022.
+//  Created by Kurt on 6/12/2022.
 //
 
 import SwiftUI
 
 struct ContentView: View {
+    
+    @State private var score = 0
     
     @State private var rootWord = ""
     @State private var arrayOfUsedWords = [String]()
@@ -18,6 +20,8 @@ struct ContentView: View {
     @State private var showingError = false
     
     func startGame() {
+        arrayOfUsedWords = []
+        score = 0
         if let startWordsURL = Bundle.main.url(forResource: "start", withExtension: "txt") {
             if let startWrods = try? String(contentsOf: startWordsURL) {
                 let allWords = startWrods.components(separatedBy: "\n")
@@ -70,11 +74,36 @@ struct ContentView: View {
             .onAppear(perform: startGame)
             //.navigationTitle("Word Scramble")
             .toolbar {
+                ToolbarItem(placement: .navigationBarLeading, content: {
+                    VStack(alignment: .center, spacing: -3) {
+                        Text("Score")
+                            .font(.footnote)
+                        Text(score, format: .number).font(.system(.largeTitle, design: .rounded).weight(.bold))
+                            .foregroundColor(.blue)
+                    }.padding(.leading, 15)
+                        .padding(.top, 15)
+                })
+                ToolbarItem(placement: .navigationBarTrailing, content: {
+                    Button(action: {
+                        startGame()
+                    }) {
+                        VStack(alignment: .center, spacing: 4) {
+                            Image(systemName: "arrow.counterclockwise")
+                                .font(.system(.headline, design: .rounded).weight(.black))
+                            Text("Refresh")
+                                .font(.footnote).fontWeight(.light)
+                                .foregroundColor(.primary)
+                        }
+                        .padding(.trailing, 15)
+                        .padding(.top, 15)
+                    }
+                })
                 ToolbarItem(placement: .principal) {
                     VStack(alignment: .center, spacing: -5) {
-                        Divider().opacity(0.0).frame(height: 15.0)
-                        Text("Your word is").font(.subheadline)
+                        Text("Your word is").font(.subheadline).fontWeight(.semibold)
+                            .padding(.top, 15)
                         Text(rootWord.lowercased()).font(.system(.largeTitle, design: .rounded).weight(.bold))
+                            .foregroundColor(.blue)
                     }
                 }
             }
@@ -92,7 +121,16 @@ struct ContentView: View {
     
     func addNewWord() {
         let answer = newWord.lowercased().trimmingCharacters(in: .whitespacesAndNewlines)
-        guard answer.count > 0 else {return}
+        
+        guard answer != rootWord else  {
+            newWord = ""
+            return
+        }
+        
+        guard answer.count > 2 else {
+            wordError(title: "Too short", message: "Words need to have 3 or more letters")
+            return
+        }
         
         //Extra validation to come
         guard isOriginal(answer) else {
@@ -111,6 +149,7 @@ struct ContentView: View {
         withAnimation{
             arrayOfUsedWords.insert(answer, at: 0)
         }
+        score = score + answer.count
         newWord = ""
     }
     
