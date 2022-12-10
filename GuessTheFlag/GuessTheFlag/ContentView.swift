@@ -2,7 +2,7 @@
 //  ContentView.swift
 //  GuessTheFlag
 //
-//  Created by Kurt Lane on 27/11/2022.
+//  Created by Kurt on 27/11/2022.
 //
 
 import SwiftUI
@@ -42,6 +42,11 @@ struct ContentView: View {
     @State private var countries = ["Estonia", "France", "Germany", "Ireland", "Italy", "Nigeria", "Poland", "Russia", "Spain", "UK", "US"].shuffled()
     @State private var correctAnswer = Int.random(in: 0...2)
     
+    @State private var tappedAnswer = 0
+    @State private var rotationAmount = 0.0
+    @State private var opacityAmount = 1.0
+    @State private var scaleAmount = 1.0
+    
     var body: some View {
         ZStack {
             RadialGradient(stops: [
@@ -69,9 +74,18 @@ struct ContentView: View {
                     
                     ForEach(0..<3) { number in
                         Button {
-                            flagTapped(number)
+                            tappedAnswer = number
+                            flagTapped(tappedAnswer)
+                            withAnimation {
+                                rotationAmount = 360
+                                opacityAmount = 0.25
+                                scaleAmount = 0.1
+                            }
                         } label: {
                             FlagImage(country: countries[number])
+                                .opacity(number == tappedAnswer ? 1.0 : opacityAmount)
+                                .rotation3DEffect(.degrees(number == tappedAnswer ? rotationAmount : 0), axis: (x: 0, y: 1, z: 0))
+                                .scaleEffect(number == tappedAnswer ? 1.0 : scaleAmount)
                         }
                     }
                 }
@@ -124,6 +138,9 @@ struct ContentView: View {
     }
     
     func askQuestion() {
+        scaleAmount = 1.0
+        opacityAmount = 1.0
+        rotationAmount = 0.0
         countries.shuffle()
         correctAnswer = Int.random(in: 0...2)
         currentQuestion += 1
