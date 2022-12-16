@@ -8,14 +8,51 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+//    let lavout = [
+//        GridItem(.adaptive(minimum: 80))
+//    ]
+    
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundColor(.accentColor)
-            Text("Hello, world!")
-        }
-        .padding()
+//        GeometryReader { geo in
+//            Image("example")
+//                .resizable()
+//                .scaledToFit()
+//                .frame(width: geo.size.width * 0.8)
+//                .frame(width: geo.size.width, height: geo.size.height)
+//        }
+        
+//        ScrollView {
+//            LazyVStack(spacing: 10) {
+//                ForEach (0..<100) {
+//                    Text ("Item \($0)")
+//                        .font (.title)
+//                }
+//            }
+//            .frame(maxWidth: .infinity)
+//        }
+        
+//        NavigationStack {
+//            List(0..<100) { row in
+//                NavigationLink {
+//                    Text("Detail \(row)")
+//                } label: {
+//                    Text ("Row \(row)")
+//                        .padding()
+//                }
+//            }.navigationTitle("SwiftUI")
+//        }
+        
+//        ScrollView {
+//            LazyVGrid(columns: lavout) {
+//                ForEach(0..<1000) {
+//                    Text ("Item \($0)")
+//                }
+//            }
+//        }
+        
+        Text("Hello, world!")
+            .padding()
     }
 }
 
