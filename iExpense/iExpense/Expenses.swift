@@ -8,23 +8,46 @@
 import Foundation
 
 class Expenses: ObservableObject {
-    @Published var items = [ExpenseItem]() {
+//    @Published var items = [ExpenseItem]() {
+//        didSet {
+//            let encoder = JSONEncoder()
+//            if let encoded = try? encoder.encode(items) {
+//                UserDefaults.standard.set(encoded, forKey: "Items")
+//            }
+//        }
+//    }
+    
+    @Published var persoonalItems = [ExpenseItem]() {
         didSet {
             let encoder = JSONEncoder()
-            if let encoded = try? encoder.encode(items) {
-                UserDefaults.standard.set(encoded, forKey: "Items")
+            if let encoded = try? encoder.encode(persoonalItems) {
+                UserDefaults.standard.set(encoded, forKey: "PersoonalItems")
+            }
+        }
+    }
+    
+    @Published var businessItems = [ExpenseItem]() {
+        didSet {
+            let encoder = JSONEncoder()
+            if let encoded = try? encoder.encode(businessItems) {
+                UserDefaults.standard.set(encoded, forKey: "BusinessItems")
             }
         }
     }
     
     init() {
-        if let savedItems = UserDefaults.standard.data(forKey: "Items") {
-            if let decodedItems = try? JSONDecoder().decode([ExpenseItem].self, from: savedItems) {
-                items = decodedItems
-                return
+        if let savedPersonalItems = UserDefaults.standard.data(forKey: "PersoonalItems"), let savedBusinessItems = UserDefaults.standard.data(forKey: "BusinessItems") {
+            if let decodedItems = try? JSONDecoder().decode([ExpenseItem].self, from: savedPersonalItems) {
+                persoonalItems = decodedItems
+            } else {
+                persoonalItems = []
+            }
+            if let decodedItems = try? JSONDecoder().decode([ExpenseItem].self, from: savedBusinessItems) {
+                businessItems = decodedItems
+            } else {
+                businessItems = []
             }
         }
-        items = []
     }
     
 }

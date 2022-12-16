@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import UIKit
 
 struct AddView: View {
     @Environment(\.dismiss) var dismiss
@@ -13,8 +14,9 @@ struct AddView: View {
     @State private var name = ""
     @State private var type = "Personal"
     @State private var amount = 0.0
+    @State private var date = Date()
     let types = ["Business", "Personal" ]
-     
+    
     var body: some View {
         NavigationStack {
             Form {
@@ -24,14 +26,29 @@ struct AddView: View {
                         Text ($0)
                     }
                 }
-                TextField("Amount", value: $amount, format: .currency(code: "USD"))
+                HStack {
+                    DatePicker("Date", selection: $date, displayedComponents: .date)
+                    DatePicker("", selection: $date, displayedComponents: .hourAndMinute)
+                        .labelsHidden()
+                }
+                .padding(.vertical)
+                
+                TextField("Amount", value: $amount, format: .currency(code: Locale.current.currency?.identifier ?? "USD"))
                     .keyboardType(.decimalPad)
+                
             }
             .navigationTitle("Add new expense")
             .toolbar {
                 Button("Save") {
-                    let item = ExpenseItem(name: name, type: type, amount: amount)
-                    expenses.items.append(item)
+                    if name == "" {
+                        name = "unknown"
+                    }
+                    let item = ExpenseItem(date: date, name: name, type: type, amount: amount)
+                    if item.type == "Personal" {
+                        expenses.persoonalItems.append(item)
+                    } else {
+                        expenses.businessItems.append(item)
+                    }
                     dismiss()
                 }
             }
