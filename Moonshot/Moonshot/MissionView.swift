@@ -24,13 +24,16 @@ struct MissionView: View {
                         .resizable()
                         .scaledToFit()
                         .frame(width: geometry.size.width * 0.6)
-                        .padding([.top,.bottom])
+                        .padding(.top)
+                    
+                    //Add the launch date to MissionView, below the mission badge. You might choose to format this differently given that more space is available, but it’s down to you.
+                    
+                    Text(mission.formattedLaunchDate)
+                        .font(.system(.title, design: .rounded).weight(.bold))
+                        .foregroundColor(.white)
                     
                     VStack(alignment: .leading) {
-                        Rectangle()
-                            .frame(height: 2)
-                            .foregroundColor(.lightBackaround)
-                            .padding(.vertical)
+                        RectangleDivider()
                         
                         Text ("Mission Highlights")
                             .font(.system(.title, design: .rounded).weight(.bold))
@@ -38,10 +41,7 @@ struct MissionView: View {
                         Text(mission.description)
                             .font(.system(.body, design: .rounded))
                         
-                        Rectangle()
-                            .frame(height: 2)
-                            .foregroundColor(.lightBackaround)
-                            .padding(.vertical)
+                        RectangleDivider()
                         
                         Text ("Crew")
                             .font(.system(.title, design: .rounded).weight(.bold))
