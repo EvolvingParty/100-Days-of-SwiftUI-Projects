@@ -130,7 +130,6 @@ struct Spirograph: Shape {
         }
         return path
     }
-    
 }
 
 struct ContentView: View {
@@ -138,11 +137,13 @@ struct ContentView: View {
     //@State private var rows = 4
     //@State private var columns = 4
     
-    @State private var innerRadius = 125.0
-    @State private var outerRadius = 75.0
-    @State private var distance = 25.0
-    @State private var amount = 1.0
+    //    @State private var innerRadius = 125.0
+    //    @State private var outerRadius = 75.0
+    //    @State private var distance = 25.0
+    //    @State private var amount = 1.0
     @State private var hue = 0.6
+    @State private var width = 100.0
+    @State private var solid = false
     
     var body: some View {
         //Paths
@@ -213,28 +214,155 @@ struct ContentView: View {
         //                }
         //            }
         
+        //        VStack(spacing: 0) {
+        //            Spacer()
+        //            Spirograph (innerRadius: Int (innerRadius) , outerRadius: Int (outerRadius) , distance:
+        //                            Int(distance), amount: amount)
+        //            .stroke(Color(hue: hue, saturation: 1, brightness: 1), lineWidth: 1)
+        //            .frame(width: 300.0, height: 300.0)
+        //            Spacer()
+        //            Group {
+        //                Text("Inner radius: \(Int(innerRadius))")
+        //                Slider (value: $innerRadius, in: 10...150, step: 1)
+        //                    .padding ([.horizontal, .bottom])
+        //                    .tint(Color(hue: hue, saturation: 1, brightness: 1))
+        //                Text ("Outer radius: \(Int(outerRadius))")
+        //                Slider (value: $outerRadius, in: 10...150, step: 1)
+        //                    .padding ([.horizontal, .bottom])
+        //                    .tint(Color(hue: hue, saturation: 1, brightness: 1))
+        //                Text ("Distance: \(Int (distance))")
+        //                Slider (value: $distance, in: 1...150, step: 1)
+        //                    .padding ([.horizontal, .bottom])
+        //                    .tint(Color(hue: hue, saturation: 1, brightness: 1))
+        //                Text ("Amount: \(amount, format: .number.precision(.fractionLength(2)))")
+        //                Slider(value: $amount)
+        //                    .padding ([.horizontal, .bottom])
+        //                    .tint(Color(hue: hue, saturation: 1, brightness: 1))
+        //                Text("Color")
+        //                Slider (value: $hue)
+        //                    .padding ([.horizontal, .bottom])
+        //                    .tint(Color(hue: hue, saturation: 1, brightness: 1))
+        //            }
+        //        }
+        
         VStack(spacing: 0) {
             Spacer()
-            Spirograph (innerRadius: Int (innerRadius) , outerRadius: Int (outerRadius) , distance:
-                            Int(distance), amount: amount)
-            .stroke(Color(hue: hue, saturation: 1, brightness: 1), lineWidth: 1)
-            .frame(width: 300.0, height: 300.0)
+            arrowShape()
+                .foregroundColor(Color(hue: hue, saturation: 1, brightness: 1))
+            //.stroke(Color(hue: hue, saturation: 1, brightness: 1), lineWidth: 10)
+                .frame (width: width, height: 500)
+                .onTapGesture {
+                    withAnimation {
+                        width = Double.random(in: 50...400)
+                        hue = Double.random(in: 0...1)
+                    }
+                }
             Spacer()
             Group {
-                Text("Inner radius: \(Int(innerRadius))")
-                Slider (value: $innerRadius, in: 10...150, step: 1)
+                Text("Width")
+                Slider (value: $width, in: 50...400)
                     .padding ([.horizontal, .bottom])
                     .tint(Color(hue: hue, saturation: 1, brightness: 1))
-                Text ("Outer radius: \(Int(outerRadius))")
-                Slider (value: $outerRadius, in: 10...150, step: 1)
+                Text("Color")
+                Slider (value: $hue)
                     .padding ([.horizontal, .bottom])
                     .tint(Color(hue: hue, saturation: 1, brightness: 1))
-                Text ("Distance: \(Int (distance))")
-                Slider (value: $distance, in: 1...150, step: 1)
-                    .padding ([.horizontal, .bottom])
-                    .tint(Color(hue: hue, saturation: 1, brightness: 1))
-                Text ("Amount: \(amount, format: .number.precision(.fractionLength(2)))")
-                Slider(value: $amount)
+            }
+        }
+    }
+}
+     
+struct Flower: Shape {
+    var petal0ffset = -20.0
+    var petalWidth = 100.0
+    func path(in rect: CGRect) -> Path {
+        var path = Path()
+        for number in stride(from: 0, to: Double.pi * 2, by: Double.pi / 8) {
+            let rotation = CGAffineTransform(rotationAngle: number)
+            let position = rotation.concatenating(CGAffineTransform(translationX: rect.width / 2, y: rect.height / 2))
+            let originalPetal = Path(ellipseIn: CGRect(x: petal0ffset, y: 0, width: petalWidth, height: rect.width / 2))
+            let rotatedPetal = originalPetal.applying (position)
+            path.addPath (rotatedPetal)
+        }
+        return path
+    }
+}
+    
+struct FlowerShape: View {
+    @State private var petal0ffset = -20.0
+    @State private var petalWidth = 100.0
+    
+    @State private var hue = 0.6
+    var body: some View {
+        VStack {
+            Spacer()
+            Flower(petal0ffset: petal0ffset, petalWidth: petalWidth)
+                .fill(Color(hue: hue, saturation: 1, brightness: 1), style: FillStyle(eoFill: true))
+                //.stroke(Color(hue: hue, saturation: 1, brightness: 1), lineWidth: 1)
+                .padding(40)
+            Spacer()
+            Text("Offset" )
+            Slider (value: $petal0ffset, in: -40...40)
+                .padding ([.horizontal, .bottom])
+                .tint(Color(hue: hue, saturation: 1, brightness: 1))
+            
+            Text ("Width" )
+            Slider (value: $petalWidth, in: 0...100)
+                .padding ([.horizontal, .bottom])
+                .tint(Color(hue: hue, saturation: 1, brightness: 1))
+            
+            Text("Hue")
+            Slider (value: $hue)
+                .padding ([.horizontal, .bottom])
+                .tint(Color(hue: hue, saturation: 1, brightness: 1))
+        }
+
+    }
+}
+
+struct arrowShape: Shape {
+    var insetAmount = 0.0
+    var animatableData: Double {
+        get { insetAmount }
+        set { insetAmount = newValue }
+    }
+    func path(in rect: CGRect) -> Path {
+        var path = Path()
+        path.move(to: CGPoint(x: rect.midX, y: rect.minY))
+        path.addLine(to: CGPoint(x: rect.minX, y: rect.maxY/4))
+        path.addLine(to: CGPoint (x: rect.maxX/3, y: rect.maxY/4))
+        path.addLine(to: CGPoint(x: rect.maxX/3, y: rect.maxY))
+        path.addLine(to: CGPoint(x: rect.maxX/1.5, y: rect.maxY))
+        path.addLine(to: CGPoint(x: rect.maxX/1.5, y: rect.maxY/4))
+        path.addLine(to: CGPoint (x: rect.maxX, y: rect.maxY/4))
+        path.addLine(to: CGPoint (x: rect.midX, y: rect.minY))
+        path.closeSubpath()
+        return path
+    }
+}
+
+struct AnimatableArrow: View {
+    @State private var hue = 0.6
+    @State private var width = 100.0
+    @State private var solid = false
+    
+    var body: some View {
+        VStack(spacing: 0) {
+            Spacer()
+            arrowShape()
+                .foregroundColor(Color(hue: hue, saturation: 1, brightness: 1))
+            //.stroke(Color(hue: hue, saturation: 1, brightness: 1), lineWidth: 10)
+                .frame (width: width, height: 500)
+                .onTapGesture {
+                    withAnimation {
+                        width = Double.random(in: 50...400)
+                        hue = Double.random(in: 0...1)
+                    }
+                }
+            Spacer()
+            Group {
+                Text("Width")
+                Slider (value: $width, in: 50...400)
                     .padding ([.horizontal, .bottom])
                     .tint(Color(hue: hue, saturation: 1, brightness: 1))
                 Text("Color")
@@ -246,8 +374,77 @@ struct ContentView: View {
     }
 }
 
+struct ColorCyclingCircle: View {
+    var amount = 0.0
+    var steps = 100
+    
+    var body: some View {
+        ZStack {
+            ForEach(0..<steps, id: \.self) { value in
+                Circle()
+                    .inset(by: Double(value))
+                    .strokeBorder(color(for: value, brightness: 1), lineWidth: 2)
+            }
+        }
+    }
+    
+    func color (for value: Int, brightness: Double) -> Color {
+        var targetHue = Double (value) / Double (steps) + amount
+        if targetHue > 1 {
+            targetHue -= 1
+        }
+        return Color (hue: targetHue, saturation: 1, brightness: brightness)
+    }
+}
+
+struct ColorCyclingRectangle: View {
+    var amount = 0.0
+    var steps = 100
+    
+    var body: some View {
+        ZStack {
+            ForEach(0..<steps, id: \.self) { value in
+                Rectangle()
+                    .inset(by: Double(value))
+                    .strokeBorder(color(for: value, brightness: 1), lineWidth: 2)
+            }
+        }
+    }
+    
+    func color (for value: Int, brightness: Double) -> Color {
+        var targetHue = Double (value) / Double (steps) + amount
+        if targetHue > 1 {
+            targetHue -= 1
+        }
+        return Color (hue: targetHue, saturation: 1, brightness: brightness)
+    }
+}
+
+struct ColorCyclingRectangle_View: View {
+    @State private var colorCycle = 0.0
+    
+    var body: some View {
+        VStack(spacing: 0) {
+            Spacer()
+            ColorCyclingRectangle(amount: colorCycle)
+                .frame(width: 200, height: 400)
+                .padding()
+            Spacer()
+            Text("Color")
+            Slider (value: $colorCycle)
+                .padding ([.horizontal, .bottom])
+                .tint(Color(hue: colorCycle, saturation: 1, brightness: 1))
+        }
+    }
+}
+
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        FlowerShape()
+            .previewDisplayName("Flower Shape")
+        AnimatableArrow()
+            .previewDisplayName("Animatable Arrow")
+        ColorCyclingRectangle_View()
+            .previewDisplayName("Color Cycling Rectangle")
     }
 }
