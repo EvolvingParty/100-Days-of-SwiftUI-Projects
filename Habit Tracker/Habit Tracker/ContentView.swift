@@ -30,7 +30,7 @@ struct ContentView: View {
                                 .foregroundColor(.secondary)
                         }.padding(.top, 6)
                     }
-                }
+                }.onDelete(perform: removeItems)
             }
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
@@ -47,6 +47,11 @@ struct ContentView: View {
             NewHabbitView(habbits: habbits)
         })
     }
+    
+    func removeItems(at offsets: IndexSet) {
+        habbits.habbitItems.remove(atOffsets: offsets)
+    }
+    
 }
 
 struct ContentView_Previews: PreviewProvider {

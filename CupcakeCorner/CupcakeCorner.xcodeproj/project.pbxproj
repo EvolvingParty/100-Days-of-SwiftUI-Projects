@@ -7,39 +7,23 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		453F3B4A295669E100CB693D /* Habbits.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453F3B49295669E100CB693D /* Habbits.swift */; };
-		453F3B4E29566CAA00CB693D /* Colours.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453F3B4D29566CAA00CB693D /* Colours.swift */; };
-		453F3B502956700100CB693D /* NewHabbitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453F3B4F2956700100CB693D /* NewHabbitView.swift */; };
-		45AE4B47295662D2006587B0 /* Habit_TrackerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45AE4B46295662D2006587B0 /* Habit_TrackerApp.swift */; };
-		45AE4B49295662D2006587B0 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45AE4B48295662D2006587B0 /* ContentView.swift */; };
-		45AE4B4B295662D3006587B0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 45AE4B4A295662D3006587B0 /* Assets.xcassets */; };
-		45AE4B4F295662D3006587B0 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 45AE4B4E295662D3006587B0 /* Preview Assets.xcassets */; };
-		45E08312295669260005067B /* HabbitItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45E08311295669260005067B /* HabbitItem.swift */; };
-		45EDD3B72956AE5A007DDA7D /* EmojiPicker_View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45EDD3B62956AE5A007DDA7D /* EmojiPicker_View.swift */; };
-		45EDD3B92956AE81007DDA7D /* Emoji.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45EDD3B82956AE81007DDA7D /* Emoji.swift */; };
-		45EDD3C12956B2D5007DDA7D /* Bundle-Decodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45EDD3C02956B2D5007DDA7D /* Bundle-Decodable.swift */; };
-		45EDD3C52956B717007DDA7D /* emojiList.json in Resources */ = {isa = PBXBuildFile; fileRef = 45EDD3C42956B717007DDA7D /* emojiList.json */; };
+		45DD778B29595A0E007CBC6F /* CupcakeCornerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45DD778A29595A0E007CBC6F /* CupcakeCornerApp.swift */; };
+		45DD778D29595A0E007CBC6F /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45DD778C29595A0E007CBC6F /* ContentView.swift */; };
+		45DD778F29595A0E007CBC6F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 45DD778E29595A0E007CBC6F /* Assets.xcassets */; };
+		45DD779329595A0E007CBC6F /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 45DD779229595A0E007CBC6F /* Preview Assets.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		453F3B49295669E100CB693D /* Habbits.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Habbits.swift; sourceTree = "<group>"; };
-		453F3B4D29566CAA00CB693D /* Colours.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colours.swift; sourceTree = "<group>"; };
-		453F3B4F2956700100CB693D /* NewHabbitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewHabbitView.swift; sourceTree = "<group>"; };
-		45AE4B43295662D2006587B0 /* Habit Tracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Habit Tracker.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		45AE4B46295662D2006587B0 /* Habit_TrackerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Habit_TrackerApp.swift; sourceTree = "<group>"; };
-		45AE4B48295662D2006587B0 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		45AE4B4A295662D3006587B0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		45AE4B4C295662D3006587B0 /* Habit_Tracker.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Habit_Tracker.entitlements; sourceTree = "<group>"; };
-		45AE4B4E295662D3006587B0 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		45E08311295669260005067B /* HabbitItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabbitItem.swift; sourceTree = "<group>"; };
-		45EDD3B62956AE5A007DDA7D /* EmojiPicker_View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiPicker_View.swift; sourceTree = "<group>"; };
-		45EDD3B82956AE81007DDA7D /* Emoji.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Emoji.swift; sourceTree = "<group>"; };
-		45EDD3C02956B2D5007DDA7D /* Bundle-Decodable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Bundle-Decodable.swift"; sourceTree = "<group>"; };
-		45EDD3C42956B717007DDA7D /* emojiList.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = emojiList.json; sourceTree = "<group>"; };
+		45DD778729595A0E007CBC6F /* CupcakeCorner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CupcakeCorner.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		45DD778A29595A0E007CBC6F /* CupcakeCornerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CupcakeCornerApp.swift; sourceTree = "<group>"; };
+		45DD778C29595A0E007CBC6F /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		45DD778E29595A0E007CBC6F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		45DD779029595A0E007CBC6F /* CupcakeCorner.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CupcakeCorner.entitlements; sourceTree = "<group>"; };
+		45DD779229595A0E007CBC6F /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		45AE4B40295662D2006587B0 /* Frameworks */ = {
+		45DD778429595A0E007CBC6F /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -49,46 +33,38 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		45AE4B3A295662D2006587B0 = {
+		45DD777E29595A0E007CBC6F = {
 			isa = PBXGroup;
 			children = (
-				45AE4B45295662D2006587B0 /* Habit Tracker */,
-				45AE4B44295662D2006587B0 /* Products */,
+				45DD778929595A0E007CBC6F /* CupcakeCorner */,
+				45DD778829595A0E007CBC6F /* Products */,
 			);
 			sourceTree = "<group>";
 		};
-		45AE4B44295662D2006587B0 /* Products */ = {
+		45DD778829595A0E007CBC6F /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				45AE4B43295662D2006587B0 /* Habit Tracker.app */,
+				45DD778729595A0E007CBC6F /* CupcakeCorner.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		45AE4B45295662D2006587B0 /* Habit Tracker */ = {
+		45DD778929595A0E007CBC6F /* CupcakeCorner */ = {
 			isa = PBXGroup;
 			children = (
-				45EDD3C02956B2D5007DDA7D /* Bundle-Decodable.swift */,
-				45AE4B46295662D2006587B0 /* Habit_TrackerApp.swift */,
-				45AE4B48295662D2006587B0 /* ContentView.swift */,
-				453F3B4F2956700100CB693D /* NewHabbitView.swift */,
-				45EDD3B62956AE5A007DDA7D /* EmojiPicker_View.swift */,
-				45EDD3B82956AE81007DDA7D /* Emoji.swift */,
-				45EDD3C42956B717007DDA7D /* emojiList.json */,
-				45E08311295669260005067B /* HabbitItem.swift */,
-				453F3B49295669E100CB693D /* Habbits.swift */,
-				453F3B4D29566CAA00CB693D /* Colours.swift */,
-				45AE4B4A295662D3006587B0 /* Assets.xcassets */,
-				45AE4B4C295662D3006587B0 /* Habit_Tracker.entitlements */,
-				45AE4B4D295662D3006587B0 /* Preview Content */,
+				45DD778A29595A0E007CBC6F /* CupcakeCornerApp.swift */,
+				45DD778C29595A0E007CBC6F /* ContentView.swift */,
+				45DD778E29595A0E007CBC6F /* Assets.xcassets */,
+				45DD779029595A0E007CBC6F /* CupcakeCorner.entitlements */,
+				45DD779129595A0E007CBC6F /* Preview Content */,
 			);
-			path = "Habit Tracker";
+			path = CupcakeCorner;
 			sourceTree = "<group>";
 		};
-		45AE4B4D295662D3006587B0 /* Preview Content */ = {
+		45DD779129595A0E007CBC6F /* Preview Content */ = {
 			isa = PBXGroup;
 			children = (
-				45AE4B4E295662D3006587B0 /* Preview Assets.xcassets */,
+				45DD779229595A0E007CBC6F /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
 			sourceTree = "<group>";
@@ -96,39 +72,39 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		45AE4B42295662D2006587B0 /* Habit Tracker */ = {
+		45DD778629595A0E007CBC6F /* CupcakeCorner */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 45AE4B52295662D3006587B0 /* Build configuration list for PBXNativeTarget "Habit Tracker" */;
+			buildConfigurationList = 45DD779629595A0E007CBC6F /* Build configuration list for PBXNativeTarget "CupcakeCorner" */;
 			buildPhases = (
-				45AE4B3F295662D2006587B0 /* Sources */,
-				45AE4B40295662D2006587B0 /* Frameworks */,
-				45AE4B41295662D2006587B0 /* Resources */,
+				45DD778329595A0E007CBC6F /* Sources */,
+				45DD778429595A0E007CBC6F /* Frameworks */,
+				45DD778529595A0E007CBC6F /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = "Habit Tracker";
-			productName = "Habit Tracker";
-			productReference = 45AE4B43295662D2006587B0 /* Habit Tracker.app */;
+			name = CupcakeCorner;
+			productName = CupcakeCorner;
+			productReference = 45DD778729595A0E007CBC6F /* CupcakeCorner.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		45AE4B3B295662D2006587B0 /* Project object */ = {
+		45DD777F29595A0E007CBC6F /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1420;
 				LastUpgradeCheck = 1420;
 				TargetAttributes = {
-					45AE4B42295662D2006587B0 = {
+					45DD778629595A0E007CBC6F = {
 						CreatedOnToolsVersion = 14.2;
 					};
 				};
 			};
-			buildConfigurationList = 45AE4B3E295662D2006587B0 /* Build configuration list for PBXProject "Habit Tracker" */;
+			buildConfigurationList = 45DD778229595A0E007CBC6F /* Build configuration list for PBXProject "CupcakeCorner" */;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -136,50 +112,42 @@
 				en,
 				Base,
 			);
-			mainGroup = 45AE4B3A295662D2006587B0;
-			productRefGroup = 45AE4B44295662D2006587B0 /* Products */;
+			mainGroup = 45DD777E29595A0E007CBC6F;
+			productRefGroup = 45DD778829595A0E007CBC6F /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				45AE4B42295662D2006587B0 /* Habit Tracker */,
+				45DD778629595A0E007CBC6F /* CupcakeCorner */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		45AE4B41295662D2006587B0 /* Resources */ = {
+		45DD778529595A0E007CBC6F /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				45AE4B4F295662D3006587B0 /* Preview Assets.xcassets in Resources */,
-				45EDD3C52956B717007DDA7D /* emojiList.json in Resources */,
-				45AE4B4B295662D3006587B0 /* Assets.xcassets in Resources */,
+				45DD779329595A0E007CBC6F /* Preview Assets.xcassets in Resources */,
+				45DD778F29595A0E007CBC6F /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		45AE4B3F295662D2006587B0 /* Sources */ = {
+		45DD778329595A0E007CBC6F /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				45E08312295669260005067B /* HabbitItem.swift in Sources */,
-				453F3B4E29566CAA00CB693D /* Colours.swift in Sources */,
-				453F3B4A295669E100CB693D /* Habbits.swift in Sources */,
-				45EDD3B92956AE81007DDA7D /* Emoji.swift in Sources */,
-				453F3B502956700100CB693D /* NewHabbitView.swift in Sources */,
-				45EDD3B72956AE5A007DDA7D /* EmojiPicker_View.swift in Sources */,
-				45EDD3C12956B2D5007DDA7D /* Bundle-Decodable.swift in Sources */,
-				45AE4B49295662D2006587B0 /* ContentView.swift in Sources */,
-				45AE4B47295662D2006587B0 /* Habit_TrackerApp.swift in Sources */,
+				45DD778D29595A0E007CBC6F /* ContentView.swift in Sources */,
+				45DD778B29595A0E007CBC6F /* CupcakeCornerApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
-		45AE4B50295662D3006587B0 /* Debug */ = {
+		45DD779429595A0E007CBC6F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -237,7 +205,7 @@
 			};
 			name = Debug;
 		};
-		45AE4B51295662D3006587B0 /* Release */ = {
+		45DD779529595A0E007CBC6F /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -288,15 +256,15 @@
 			};
 			name = Release;
 		};
-		45AE4B53295662D3006587B0 /* Debug */ = {
+		45DD779729595A0E007CBC6F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = "Habit Tracker/Habit_Tracker.entitlements";
+				CODE_SIGN_ENTITLEMENTS = CupcakeCorner/CupcakeCorner.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"Habit Tracker/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"CupcakeCorner/Preview Content\"";
 				DEVELOPMENT_TEAM = U526XBCKA2;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
@@ -316,7 +284,7 @@
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 13.1;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "Kurt.Lane.Habit-Tracker";
+				PRODUCT_BUNDLE_IDENTIFIER = Kurt.Lane.CupcakeCorner;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
@@ -326,15 +294,15 @@
 			};
 			name = Debug;
 		};
-		45AE4B54295662D3006587B0 /* Release */ = {
+		45DD779829595A0E007CBC6F /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = "Habit Tracker/Habit_Tracker.entitlements";
+				CODE_SIGN_ENTITLEMENTS = CupcakeCorner/CupcakeCorner.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"Habit Tracker/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"CupcakeCorner/Preview Content\"";
 				DEVELOPMENT_TEAM = U526XBCKA2;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
@@ -354,7 +322,7 @@
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 13.1;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "Kurt.Lane.Habit-Tracker";
+				PRODUCT_BUNDLE_IDENTIFIER = Kurt.Lane.CupcakeCorner;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
@@ -367,25 +335,25 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		45AE4B3E295662D2006587B0 /* Build configuration list for PBXProject "Habit Tracker" */ = {
+		45DD778229595A0E007CBC6F /* Build configuration list for PBXProject "CupcakeCorner" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				45AE4B50295662D3006587B0 /* Debug */,
-				45AE4B51295662D3006587B0 /* Release */,
+				45DD779429595A0E007CBC6F /* Debug */,
+				45DD779529595A0E007CBC6F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		45AE4B52295662D3006587B0 /* Build configuration list for PBXNativeTarget "Habit Tracker" */ = {
+		45DD779629595A0E007CBC6F /* Build configuration list for PBXNativeTarget "CupcakeCorner" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				45AE4B53295662D3006587B0 /* Debug */,
-				45AE4B54295662D3006587B0 /* Release */,
+				45DD779729595A0E007CBC6F /* Debug */,
+				45DD779829595A0E007CBC6F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = 45AE4B3B295662D2006587B0 /* Project object */;
+	rootObject = 45DD777F29595A0E007CBC6F /* Project object */;
 }
