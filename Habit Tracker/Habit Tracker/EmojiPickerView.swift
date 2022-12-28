@@ -40,7 +40,7 @@ struct EmojiPickerView: View {
                     }
                 } else {
                     if emojisToAdd.count != 0 {
-                        emojisToReturn.append(EmojiCategory(id: prevHeader, emoji: emojisToAdd))
+                        emojisToReturn.append(EmojiCategory(category: prevHeader, emoji: emojisToAdd))
                     }
                     emojisToAdd = []
                     if searchText.isEmpty {
@@ -55,7 +55,7 @@ struct EmojiPickerView: View {
             prevHeader = emoji.category
         }
         if emojisToAdd.count != 0 {
-            emojisToReturn.append(EmojiCategory(id: prevHeader, emoji: emojisToAdd))
+            emojisToReturn.append(EmojiCategory(category: prevHeader, emoji: emojisToAdd))
         }
         return emojisToReturn
     }
@@ -64,24 +64,24 @@ struct EmojiPickerView: View {
         NavigationStack {
             ScrollView {
                 LazyVGrid(columns: columns) {
-                    ForEach(sortedEmoji) { emojiCategory in
+                    ForEach(sortedEmoji, id: \.self) { emojiCategory in
                         Section {
-                            ForEach(emojiCategory.emoji) { emoji in
+                            ForEach(emojiCategory.emoji, id: \.self) { emoji in
                                 HStack {
-                                    Text(emoji.id)
+                                    Text(emoji.emoji)
                                         .font(.largeTitle)
                                         .minimumScaleFactor(0.1)
                                 }
                                 .frame(height: 40, alignment: .center)
                                 .onTapGesture {
                                     print(emoji.description)
-                                    selectedEmoji = emoji.id
+                                    selectedEmoji = emoji.emoji
                                     dismiss()
                                 }
                             }
                         } header: {
                             HStack {
-                                Text(emojiCategory.id.uppercased())
+                                Text(emojiCategory.category.uppercased())
                                     .font(.headline)
                                     .foregroundColor(.secondary)
                                 Spacer()

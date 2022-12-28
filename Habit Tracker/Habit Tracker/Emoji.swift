@@ -13,13 +13,13 @@ import Foundation
 //}
 //
 
-struct EmojiCategory:  Codable, Identifiable {
-    var id: String
+struct EmojiCategory:  Codable, Hashable {
+    let category: String
     let emoji: [Emoji]
 }
 
-struct Emoji: Codable, Identifiable {
-    var id: String
+struct Emoji: Codable, Hashable {
+    let emoji: String
     let description: String
     let category: String
 }

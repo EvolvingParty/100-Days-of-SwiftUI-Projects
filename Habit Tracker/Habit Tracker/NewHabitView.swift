@@ -1,5 +1,5 @@
 //
-//  NewHabbitView.swift
+//  NewHabitView.swift
 //  Habit Tracker
 //
 //  Created by Kurt Lane on 24/12/2022.
@@ -7,13 +7,13 @@
 
 import SwiftUI
 
-struct NewHabbitView: View {
+struct NewHabitView: View {
     @Environment(\.dismiss) var dismiss
-    @ObservedObject var habbits: Habbits
+    @ObservedObject var habits: Habits
     @State private var name = ""
     @State private var description = ""
     @State private var dateStarted = Date()
-    @State private var habbitImage = "😇"
+    @State private var habitImage = "😇"
     @State private var showingEmojiPicker = false
     
     var body: some View {
@@ -24,7 +24,7 @@ struct NewHabbitView: View {
                     HStack {
                         Spacer()
                         ZStack {
-                            Text(habbitImage)
+                            Text(habitImage)
                                 .font(.system(size: 300.0))
                                 .lineLimit(1)
                                 .padding(30)
@@ -54,13 +54,13 @@ struct NewHabbitView: View {
                 }
             }
             .sheet(isPresented: $showingEmojiPicker) {
-                EmojiPickerView(selectedEmoji: $habbitImage)
+                EmojiPickerView(selectedEmoji: $habitImage)
             }
-            .navigationTitle("Add New Habbit")
+            .navigationTitle("Add New Habit")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 Button("Save") {
-                    habbits.newHabbitItem(name: name, description: description, habbitImage: habbitImage)
+                    habits.newHabitItem(name: name, description: description, habitImage: habitImage)
                     dismiss()
                 }
             }
@@ -68,8 +68,8 @@ struct NewHabbitView: View {
     }
 }
 
-struct NewHabbitView_Previews: PreviewProvider {
+struct NewHabitView_Previews: PreviewProvider {
     static var previews: some View {
-        NewHabbitView(habbits: Habbits())
+        NewHabitView(habits: Habits())
     }
 }

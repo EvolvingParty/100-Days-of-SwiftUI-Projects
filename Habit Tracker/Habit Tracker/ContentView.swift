@@ -8,14 +8,14 @@
 import SwiftUI
 
 struct ContentView: View {
-    @StateObject var habbits = Habbits()
+    @StateObject var habits = Habits()
     @State var addNewHabitItem = false
     var body: some View {
         NavigationStack {
             List {
-                ForEach(habbits.habbitItems) { item in
+                ForEach(habits.habitItems) { item in
                     HStack(alignment: .top) {
-                        Text(item.habbitImage)
+                        Text(item.habitImage)
                             .font(.system(size: 100))
                             .lineLimit(1)
                             .minimumScaleFactor(0.1)
@@ -41,15 +41,15 @@ struct ContentView: View {
                     }
                 }
             }
-            .navigationTitle("Habbit Tracker")
+            .navigationTitle("Habit Tracker")
         }
         .sheet(isPresented: $addNewHabitItem, content: {
-            NewHabbitView(habbits: habbits)
+            NewHabitView(habits: habits)
         })
     }
     
     func removeItems(at offsets: IndexSet) {
-        habbits.habbitItems.remove(atOffsets: offsets)
+        habits.habitItems.remove(atOffsets: offsets)
     }
     
 }
