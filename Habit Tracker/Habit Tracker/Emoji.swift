@@ -7,6 +7,17 @@
 
 import Foundation
 
+//struct Emoji: Codable, Identifiable {
+//    var id: String
+//    let description: String
+//}
+//
+
+struct EmojiCategory:  Codable, Identifiable {
+    var id: String
+    let emoji: [Emoji]
+}
+
 struct Emoji: Codable, Identifiable {
     var id: String
     let description: String

@@ -14,6 +14,7 @@ struct NewHabbitView: View {
     @State private var description = ""
     @State private var dateStarted = Date()
     @State private var habbitImage = "😇"
+    @State private var showingEmojiPicker = false
     
     var body: some View {
         NavigationStack {
@@ -36,6 +37,9 @@ struct NewHabbitView: View {
                     Text("Edit")
                         .foregroundColor(.blue)
                 }.listRowBackground(Color.clear)
+                    .onTapGesture {
+                        showingEmojiPicker = true
+                    }
                 Section {
                     TextField("Name", text: $name)
                     TextField("Description", text: $description)
@@ -48,6 +52,9 @@ struct NewHabbitView: View {
                     }
                     .padding(.vertical)
                 }
+            }
+            .sheet(isPresented: $showingEmojiPicker) {
+                EmojiPickerView(selectedEmoji: $habbitImage)
             }
             .navigationTitle("Add New Habbit")
             .navigationBarTitleDisplayMode(.inline)
