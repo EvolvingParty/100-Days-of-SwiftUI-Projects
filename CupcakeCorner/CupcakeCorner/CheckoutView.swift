@@ -11,6 +11,7 @@ struct CheckoutView: View {
     @ObservedObject var order: Order
     @State private var showingConfirmation = false
     @State private var confirmationMessage = ""
+    @State private var confirmationTitle = ""
     var body: some View {
         ScrollView {
             VStack {
@@ -33,7 +34,7 @@ struct CheckoutView: View {
         }
         .navigationTitle("Check out")
         .navigationBarTitleDisplayMode(.inline)
-        .alert ("Thank you!", isPresented: $showingConfirmation) {
+        .alert (confirmationTitle, isPresented: $showingConfirmation) {
             Button("OK") {}
         } message: {
             Text(confirmationMessage)
@@ -48,14 +49,18 @@ struct CheckoutView: View {
         let url = URL(string: "https://reqres.in/api/cupcakes")!
         var request = URLRequest(url: url)
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.httpMethod = "POST"
+        //request.httpMethod = "POST"
         do {
             let (data,_) = try await URLSession.shared.upload(for: request, from: encoded)
             let decodedOrder = try JSONDecoder().decode(Order.self, from: data)
+            confirmationTitle = "Thank you!"
             confirmationMessage = "Your order for \(decodedOrder.quantity)× \(Order.types[decodedOrder.type].lowercased()) cupcakes is on its way!"
             showingConfirmation = true
         } catch {
             print ("Failed to upload order")
+            confirmationTitle = "Failed to place order"
+            confirmationMessage = "Please check your internet connection and try again."
+            showingConfirmation = true
         }
     }
 }
