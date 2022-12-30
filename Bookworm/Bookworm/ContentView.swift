@@ -52,39 +52,71 @@ struct TextEditorView: View {
 
 
 //CoreData
-struct CoreDataView: View {
-    @Environment(\.managedObjectContext) var moc
-    @FetchRequest(sortDescriptors: []) var students: FetchedResults<Student>
-    var body: some View {
-        VStack {
-            List(students) { student in
-                Text(student.name ?? "Unknown")
-            }
-            Button("Add") {
-                let firstNames = ["Ginny", "Harry", "Hermione", "Luna", "Ron"]
-                let lastNames = [ "Granger", "Lovegood", "Potter", "Weasley"]
-                let chosenFirstName = firstNames.randomElement()!
-                let chosenLastName = lastNames.randomElement()!
-                
-                let newStudent = Student(context: moc)
-                newStudent.id = UUID()
-                newStudent.name = "\(chosenFirstName) \(chosenLastName)"
-                try? moc.save()
-            }
-        }
-    }
-}
+//struct CoreDataView: View {
+//    @Environment(\.managedObjectContext) var moc
+//    @FetchRequest(sortDescriptors: []) var students: FetchedResults<Student>
+//    var body: some View {
+//        VStack {
+//            List(students) { student in
+//                Text(student.name ?? "Unknown")
+//            }
+//            Button("Add") {
+//                let firstNames = ["Ginny", "Harry", "Hermione", "Luna", "Ron"]
+//                let lastNames = [ "Granger", "Lovegood", "Potter", "Weasley"]
+//                let chosenFirstName = firstNames.randomElement()!
+//                let chosenLastName = lastNames.randomElement()!
+//                
+//                let newStudent = Student(context: moc)
+//                newStudent.id = UUID()
+//                newStudent.name = "\(chosenFirstName) \(chosenLastName)"
+//                try? moc.save()
+//            }
+//        }
+//    }
+//}
 
 //Bookworm App
 struct ContentView: View {
+    @Environment(\.managedObjectContext) var moc
+    @FetchRequest(sortDescriptors: []) var books: FetchedResults<Book>
+    @State private var showingAddScreen = false
+    
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundColor(.accentColor)
-            Text("Hello, world!")
+        NavigationStack {
+            VStack {
+                List {
+                    ForEach(books) { book in
+                        NavigationLink {
+                            Text(book.title ?? "Unknown")
+                        } label: {
+                            HStack {
+                                EmojiRatingView(rating: book.rating)
+                                    .font(.largeTitle)
+                                VStack (alignment: .leading) {
+                                    Text(book.title ?? "Unknown Title")
+                                        .font(.system(.headline, design: .rounded))
+                                    Text (book.author ?? "Unknown Author")
+                                        .foregroundColor(.secondary)
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            .navigationTitle( "Bookworm" )
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button {
+                        showingAddScreen.toggle()
+                    } label: {
+                        Label ("Add Book", systemImage: "plus")
+                    }
+                }
+            }
         }
-        .padding()
+        .sheet(isPresented: $showingAddScreen) {
+            AddBookView()
+        }
     }
 }
 
@@ -96,7 +128,7 @@ struct ContentView_Previews: PreviewProvider {
             .previewDisplayName("Push Button")
         TextEditorView()
             .previewDisplayName("Text Editor")
-        CoreDataView()
-            .previewDisplayName("Core Data")
+//        CoreDataView()
+//            .previewDisplayName("Core Data")
     }
 }
