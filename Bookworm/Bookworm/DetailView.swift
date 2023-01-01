@@ -31,8 +31,16 @@ struct DetailView: View {
             Text(book.author ?? "Unknown Author")
                 .font(.system(.title, design: .rounded).weight(.semibold))
                 .foregroundColor(.secondary)
-            Text(book.review ?? "No review")
-                .padding()
+            
+            VStack {
+                Text(book.review ?? "No review")
+                HStack {
+                    Spacer()
+                    Text(book.date?.formatted(date: .abbreviated, time: .shortened) ?? Date().formatted(date: .abbreviated, time: .shortened))
+                        .font(.caption2)
+                }.padding(.top, 10)
+            }
+            .padding()
             RatingView(rating: .constant(Int(book.rating)))
                 .font(.largeTitle)
         }

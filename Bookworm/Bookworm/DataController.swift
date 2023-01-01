@@ -16,6 +16,7 @@ extension Book {
         sampleBook.author = "Sample Author"
         sampleBook.rating = 4
         sampleBook.id = UUID()
+        sampleBook.date = Date.now
         sampleBook.genre = "Horror"
         sampleBook.review = """
 "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris volutpat fermentum enim. Ut vitae urna odio. Suspendisse condimentum, arcu sed rhoncus auctor, dui nibh ultrices tortor, et elementum lorem ante eget mauris. Aenean tincidunt fringilla eros, sed sagittis ipsum volutpat ut. Donec fringilla mi sed nisl viverra, nec pretium tortor pretium. Nunc at ullamcorper est. Morbi ex ipsum, porttitor et lorem at, finibus pellentesque velit. In a convallis magna, fringilla fringilla mi.
