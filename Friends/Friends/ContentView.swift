@@ -8,16 +8,18 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State private var allFriends: [Friend] = []
+    @State private var allUsers: [User] = []
     
     @State private var showingAlert = false
     @State private var alertTitle = ""
     @State private var alertMessage = ""
     
+    private var sortOptions = ["A-Z", "Online", "Offline"]
+    
     var body: some View {
         NavigationStack {
             ZStack {
-                if allFriends.isEmpty {
+                if allUsers.isEmpty {
                     VStack {
                         Spacer()
                         ProgressView()
@@ -26,8 +28,14 @@ struct ContentView: View {
                     }
                 } else {
                     List {
-                        ForEach(allFriends) { friend in
-                            Text(friend.name)
+                        ForEach(allUsers) { user in
+                            HStack {
+                                Text(user.isActive ? "🟢" : "⚪️")
+                                Text(user.name)
+                                    .foregroundColor(user.isActive ? Color.primary : Color.primary.opacity(0.75))
+                                    .font(.system(.title3, design: .rounded))
+                                    .padding(.top, 1)
+                            }
                         }
                     }
                 }
@@ -42,14 +50,29 @@ struct ContentView: View {
             } message: {
                 Text(alertMessage)
             }
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Menu {
+                        ForEach(sortOptions, id: \.self) { option in
+                            Button {} label: {
+                                HStack {
+                                    Text(option)
+                                }
+                            }
+                        }
+                    } label: {
+                        Image(systemName: "arrow.up.arrow.down")
+                    }
+                }
+            }
         }
     }
     
     func loadFriends() async {
         if let url = URL(string: "https://www.hackingwithswift.com/samples/friendface.json") {
             do {
-                let contents: [Friend] = try await URLSession.shared.decode(from: url)
-                allFriends = contents
+                let contents: [User] = try await URLSession.shared.decode(from: url)
+                allUsers = contents
             } catch {
                 // contents could not be loaded
                 alertTitle = "Connection Error"

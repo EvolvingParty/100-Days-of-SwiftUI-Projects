@@ -24,13 +24,13 @@ struct NewHabitView: View {
                     HStack {
                         Spacer()
                         ZStack {
+                            Circle()
+                                .foregroundColor(.secondary.opacity(0.05))
                             Text(habitImage)
                                 .font(.system(size: 300.0))
                                 .lineLimit(1)
                                 .padding(30)
                                 .minimumScaleFactor(0.1)
-                            Circle()
-                                .foregroundColor(.secondary.opacity(0.05))
                         }.frame(width: 160, height: 160)
                         Spacer()
                     }

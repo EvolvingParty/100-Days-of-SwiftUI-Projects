@@ -19,6 +19,7 @@ struct User: Codable, Identifiable {
     let name: String
     let age: Int
     let company: String
+    let address: String
     let email: String
     let about: String
     let registered: String

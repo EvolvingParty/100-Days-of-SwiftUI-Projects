@@ -7,23 +7,25 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		453F82612963FBB800C730E3 /* UserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453F82602963FBB800C730E3 /* UserView.swift */; };
 		4561318529639FFD00A50043 /* FriendsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4561318429639FFD00A50043 /* FriendsApp.swift */; };
 		4561318729639FFD00A50043 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4561318629639FFD00A50043 /* ContentView.swift */; };
 		4561318929639FFE00A50043 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4561318829639FFE00A50043 /* Assets.xcassets */; };
 		4561318D29639FFE00A50043 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4561318C29639FFE00A50043 /* Preview Assets.xcassets */; };
-		456131942963A08B00A50043 /* Friend.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456131932963A08B00A50043 /* Friend.swift */; };
+		456131942963A08B00A50043 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456131932963A08B00A50043 /* User.swift */; };
 		456131962963A21600A50043 /* BundleDecodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456131952963A21600A50043 /* BundleDecodable.swift */; };
 		456131982963A28200A50043 /* _friendface.json in Resources */ = {isa = PBXBuildFile; fileRef = 456131972963A28200A50043 /* _friendface.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		453F82602963FBB800C730E3 /* UserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserView.swift; sourceTree = "<group>"; };
 		4561318129639FFD00A50043 /* Friends.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Friends.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4561318429639FFD00A50043 /* FriendsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsApp.swift; sourceTree = "<group>"; };
 		4561318629639FFD00A50043 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		4561318829639FFE00A50043 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4561318A29639FFE00A50043 /* Friends.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Friends.entitlements; sourceTree = "<group>"; };
 		4561318C29639FFE00A50043 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		456131932963A08B00A50043 /* Friend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Friend.swift; sourceTree = "<group>"; };
+		456131932963A08B00A50043 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		456131952963A21600A50043 /* BundleDecodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BundleDecodable.swift; sourceTree = "<group>"; };
 		456131972963A28200A50043 /* _friendface.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = _friendface.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -61,8 +63,9 @@
 				456131972963A28200A50043 /* _friendface.json */,
 				4561318429639FFD00A50043 /* FriendsApp.swift */,
 				456131952963A21600A50043 /* BundleDecodable.swift */,
-				456131932963A08B00A50043 /* Friend.swift */,
+				456131932963A08B00A50043 /* User.swift */,
 				4561318629639FFD00A50043 /* ContentView.swift */,
+				453F82602963FBB800C730E3 /* UserView.swift */,
 				4561318829639FFE00A50043 /* Assets.xcassets */,
 				4561318A29639FFE00A50043 /* Friends.entitlements */,
 				4561318B29639FFE00A50043 /* Preview Content */,
@@ -149,8 +152,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				456131942963A08B00A50043 /* Friend.swift in Sources */,
+				456131942963A08B00A50043 /* User.swift in Sources */,
 				456131962963A21600A50043 /* BundleDecodable.swift in Sources */,
+				453F82612963FBB800C730E3 /* UserView.swift in Sources */,
 				4561318729639FFD00A50043 /* ContentView.swift in Sources */,
 				4561318529639FFD00A50043 /* FriendsApp.swift in Sources */,
 			);
