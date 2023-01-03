@@ -24,6 +24,12 @@ import CoreData
 //    }
 //}
 
+enum PredicateType: String {
+    case beginsWith = "BEGINSWITH"
+    case contains = "CONTAINS"
+    case containsCI = "CONTAINS[c]"
+}
+
 struct FilteredList<T: NSManagedObject, Content: View>: View {
     @FetchRequest var fetchRequest: FetchedResults<T>
     let centent: (T) -> Content
@@ -37,7 +43,7 @@ struct FilteredList<T: NSManagedObject, Content: View>: View {
     }
     
     init(filterKey: String, predicateType: String, filterValue: String, @ViewBuilder centent: @escaping (T) -> Content) {
-        _fetchRequest = FetchRequest<T> (sortDescriptors: [], predicate: NSPredicate (format: "%K \(predicateType) %@", filterKey, filterValue))
+        _fetchRequest = FetchRequest<T> (sortDescriptors: [], predicate: NSPredicate(format: "%K \(predicateType) %@", filterKey, filterValue))
         self.centent = centent
     }
 }
