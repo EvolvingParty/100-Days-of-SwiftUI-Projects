@@ -7,13 +7,12 @@
 
 import Foundation
 
+public class Friend: NSObject, Codable, Identifiable {
+    public let id: String
+    let name: String
+}
+
 struct User: Codable, Identifiable {
-    
-    struct Friend: Codable {
-        let id: String
-        let name: String
-    }
-    
     let id: String
     let isActive: Bool
     let name: String

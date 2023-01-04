@@ -15,6 +15,11 @@
 		456131942963A08B00A50043 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456131932963A08B00A50043 /* User.swift */; };
 		456131962963A21600A50043 /* BundleDecodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456131952963A21600A50043 /* BundleDecodable.swift */; };
 		456131982963A28200A50043 /* _friendface.json in Resources */ = {isa = PBXBuildFile; fileRef = 456131972963A28200A50043 /* _friendface.json */; };
+		4561FDFF29650523003A31E4 /* emojiList.json in Resources */ = {isa = PBXBuildFile; fileRef = 4561FDFD29650523003A31E4 /* emojiList.json */; };
+		4561FE0029650523003A31E4 /* EmojiPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4561FDFE29650523003A31E4 /* EmojiPickerView.swift */; };
+		4561FE0229650550003A31E4 /* Emoji.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4561FE0129650550003A31E4 /* Emoji.swift */; };
+		456ABB8A296557AB0045820F /* FriendFaceDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 456ABB88296557AB0045820F /* FriendFaceDataModel.xcdatamodeld */; };
+		456ABB8C296558EA0045820F /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456ABB8B296558EA0045820F /* DataController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +33,11 @@
 		456131932963A08B00A50043 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		456131952963A21600A50043 /* BundleDecodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BundleDecodable.swift; sourceTree = "<group>"; };
 		456131972963A28200A50043 /* _friendface.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = _friendface.json; sourceTree = "<group>"; };
+		4561FDFD29650523003A31E4 /* emojiList.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = emojiList.json; sourceTree = "<group>"; };
+		4561FDFE29650523003A31E4 /* EmojiPickerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmojiPickerView.swift; sourceTree = "<group>"; };
+		4561FE0129650550003A31E4 /* Emoji.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Emoji.swift; sourceTree = "<group>"; };
+		456ABB89296557AB0045820F /* FriendFaceDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = FriendFaceDataModel.xcdatamodel; sourceTree = "<group>"; };
+		456ABB8B296558EA0045820F /* DataController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,11 +71,16 @@
 			isa = PBXGroup;
 			children = (
 				456131972963A28200A50043 /* _friendface.json */,
+				456ABB88296557AB0045820F /* FriendFaceDataModel.xcdatamodeld */,
+				456ABB8B296558EA0045820F /* DataController.swift */,
 				4561318429639FFD00A50043 /* FriendsApp.swift */,
 				456131952963A21600A50043 /* BundleDecodable.swift */,
 				456131932963A08B00A50043 /* User.swift */,
 				4561318629639FFD00A50043 /* ContentView.swift */,
 				453F82602963FBB800C730E3 /* UserView.swift */,
+				4561FDFD29650523003A31E4 /* emojiList.json */,
+				4561FDFE29650523003A31E4 /* EmojiPickerView.swift */,
+				4561FE0129650550003A31E4 /* Emoji.swift */,
 				4561318829639FFE00A50043 /* Assets.xcassets */,
 				4561318A29639FFE00A50043 /* Friends.entitlements */,
 				4561318B29639FFE00A50043 /* Preview Content */,
@@ -141,6 +156,7 @@
 			files = (
 				4561318D29639FFE00A50043 /* Preview Assets.xcassets in Resources */,
 				4561318929639FFE00A50043 /* Assets.xcassets in Resources */,
+				4561FDFF29650523003A31E4 /* emojiList.json in Resources */,
 				456131982963A28200A50043 /* _friendface.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -155,6 +171,10 @@
 				456131942963A08B00A50043 /* User.swift in Sources */,
 				456131962963A21600A50043 /* BundleDecodable.swift in Sources */,
 				453F82612963FBB800C730E3 /* UserView.swift in Sources */,
+				4561FE0029650523003A31E4 /* EmojiPickerView.swift in Sources */,
+				456ABB8C296558EA0045820F /* DataController.swift in Sources */,
+				456ABB8A296557AB0045820F /* FriendFaceDataModel.xcdatamodeld in Sources */,
+				4561FE0229650550003A31E4 /* Emoji.swift in Sources */,
 				4561318729639FFD00A50043 /* ContentView.swift in Sources */,
 				4561318529639FFD00A50043 /* FriendsApp.swift in Sources */,
 			);
@@ -370,6 +390,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		456ABB88296557AB0045820F /* FriendFaceDataModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				456ABB89296557AB0045820F /* FriendFaceDataModel.xcdatamodel */,
+			);
+			currentVersion = 456ABB89296557AB0045820F /* FriendFaceDataModel.xcdatamodel */;
+			path = FriendFaceDataModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 4561317929639FFD00A50043 /* Project object */;
 }
