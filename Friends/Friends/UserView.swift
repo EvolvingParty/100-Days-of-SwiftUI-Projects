@@ -6,17 +6,20 @@
 //
 
 import SwiftUI
+import CoreData
 
 struct UserView: View {
     //@State private var allUsers: [User]
     //@State private var selectedUser: User
-    @State private var selectedUser: CashedUser
+    @State var selectedUser: CashedUser
+//    @Environment(\.managedObjectContext) var moc
+//    @FetchRequest(sortDescriptors: [SortDescriptor(\.name)]) var cashedFriends: FetchedResults<CashedFriend>
     @State private var userAvatar = "😇"
     @State private var showingEmojiPicker = false
-    
+
     init(allUsers: [User], selectedUser: CashedUser, userAvatar: String = "😇", showingEmojiPicker: Bool = false) {
-//        self.allUsers = allUsers
-//        self.selectedUser = selectedUser
+        //self.allUsers = allUsers
+        //self.selectedUser = selectedUser
         self.selectedUser = selectedUser
         _userAvatar = State(initialValue: UserDefaults.standard.string(forKey: selectedUser.id ?? "") ?? "😇")
         self.showingEmojiPicker = showingEmojiPicker
@@ -94,23 +97,14 @@ struct UserView: View {
                     }
                 }
                 
-//                Section {
-//                    ForEach(selectedUser.friends, id: \.id) { user in
-//                        if let fullUser = allUsers.first { $0.id == user.id } {
-//                            NavigationLink(destination: {UserView(allUsers: allUsers, selectedUser: fullUser)}, label: {
-//                                HStack {
-//                                    Text(fullUser.isActive ? "🟢" : "⚪️")
-//                                    Text(fullUser.name)
-//                                        .foregroundColor(fullUser.isActive ? Color.primary : Color.primary.opacity(0.75))
-//                                        .font(.system(.title3, design: .rounded))
-//                                        .padding(.top, 1)
-//                                }
-//                            })
-//                        }
-//                    }
-//                } header: {
-//                    Text("Friends")
-//                }
+                Section {
+                    let friendsNames: [String] = selectedUser.friendIDs?.components(separatedBy: ",") ?? []
+                    ForEach(friendsNames, id: \.self) { friend in
+                        Text(friend)
+                    }
+                } header: {
+                    Text("Friends")
+                }
             
                 Section {
                     ScrollView(.horizontal, showsIndicators: false) {

@@ -124,23 +124,28 @@ struct ContentView: View {
                 do {
                     let contents: [User] = try await URLSession.shared.decode(from: url)
                     //allUsers = contents
-                    for user in contents {
-                        let newUser = CashedUser(context: moc)
-                        newUser.id = user.id
-                        newUser.isActive = user.isActive
-                        newUser.name = user.name
-                        newUser.age = Int16(user.age)
-                        newUser.address = user.address
-                        newUser.company = user.company
-                        newUser.email = user.email
-                        newUser.about = user.about
-                        newUser.registered = user.registered
+                    for friend in contents {
+                        let newFriend = CashedUser(context: moc)
+                        newFriend.id = friend.id
+                        newFriend.name = friend.name
+                        newFriend.isActive = friend.isActive
+                        newFriend.name = friend.name
+                        newFriend.age = Int16(friend.age)
+                        newFriend.address = friend.address
+                        newFriend.company = friend.company
+                        newFriend.email = friend.email
+                        newFriend.about = friend.about
+                        newFriend.registered = friend.registered
+                        var friendsString = ""
+                        for friend in friend.friends {
+                            friendsString += "\(friend.name),"
+                        }
+                        newFriend.friendIDs = friendsString
                         var tagsString = ""
-                        for tag in user.tags {
+                        for tag in friend.tags {
                             tagsString += "\(tag),"
                         }
-                        newUser.tags = tagsString
-                        //newUser.friends = user.friends
+                        newFriend.tags = tagsString
                     }
                     if moc.hasChanges {
                         try moc.save()

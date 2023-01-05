@@ -7,45 +7,23 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		453F82612963FBB800C730E3 /* UserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453F82602963FBB800C730E3 /* UserView.swift */; };
-		4561318529639FFD00A50043 /* FriendsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4561318429639FFD00A50043 /* FriendsApp.swift */; };
-		4561318729639FFD00A50043 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4561318629639FFD00A50043 /* ContentView.swift */; };
-		4561318929639FFE00A50043 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4561318829639FFE00A50043 /* Assets.xcassets */; };
-		4561318D29639FFE00A50043 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4561318C29639FFE00A50043 /* Preview Assets.xcassets */; };
-		456131942963A08B00A50043 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456131932963A08B00A50043 /* User.swift */; };
-		456131962963A21600A50043 /* BundleDecodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456131952963A21600A50043 /* BundleDecodable.swift */; };
-		456131982963A28200A50043 /* _friendface.json in Resources */ = {isa = PBXBuildFile; fileRef = 456131972963A28200A50043 /* _friendface.json */; };
-		4561FDFF29650523003A31E4 /* emojiList.json in Resources */ = {isa = PBXBuildFile; fileRef = 4561FDFD29650523003A31E4 /* emojiList.json */; };
-		4561FE0029650523003A31E4 /* EmojiPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4561FDFE29650523003A31E4 /* EmojiPickerView.swift */; };
-		4561FE0229650550003A31E4 /* Emoji.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4561FE0129650550003A31E4 /* Emoji.swift */; };
-		456ABB8A296557AB0045820F /* FriendFaceDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 456ABB88296557AB0045820F /* FriendFaceDataModel.xcdatamodeld */; };
-		456ABB8C296558EA0045820F /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456ABB8B296558EA0045820F /* DataController.swift */; };
-		45F5BAC529667F1C00F8990B /* CashedUser+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F5BAC329667F1C00F8990B /* CashedUser+CoreDataClass.swift */; };
-		45F5BAC629667F1C00F8990B /* CashedUser+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F5BAC429667F1C00F8990B /* CashedUser+CoreDataProperties.swift */; };
+		456C9E11296684790097CC4C /* InstafilterApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456C9E10296684790097CC4C /* InstafilterApp.swift */; };
+		456C9E13296684790097CC4C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 456C9E12296684790097CC4C /* ContentView.swift */; };
+		456C9E15296684790097CC4C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 456C9E14296684790097CC4C /* Assets.xcassets */; };
+		456C9E19296684790097CC4C /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 456C9E18296684790097CC4C /* Preview Assets.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		453F82602963FBB800C730E3 /* UserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserView.swift; sourceTree = "<group>"; };
-		4561318129639FFD00A50043 /* Friends.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Friends.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		4561318429639FFD00A50043 /* FriendsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsApp.swift; sourceTree = "<group>"; };
-		4561318629639FFD00A50043 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		4561318829639FFE00A50043 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		4561318A29639FFE00A50043 /* Friends.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Friends.entitlements; sourceTree = "<group>"; };
-		4561318C29639FFE00A50043 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		456131932963A08B00A50043 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
-		456131952963A21600A50043 /* BundleDecodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BundleDecodable.swift; sourceTree = "<group>"; };
-		456131972963A28200A50043 /* _friendface.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = _friendface.json; sourceTree = "<group>"; };
-		4561FDFD29650523003A31E4 /* emojiList.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = emojiList.json; sourceTree = "<group>"; };
-		4561FDFE29650523003A31E4 /* EmojiPickerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmojiPickerView.swift; sourceTree = "<group>"; };
-		4561FE0129650550003A31E4 /* Emoji.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Emoji.swift; sourceTree = "<group>"; };
-		456ABB89296557AB0045820F /* FriendFaceDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = FriendFaceDataModel.xcdatamodel; sourceTree = "<group>"; };
-		456ABB8B296558EA0045820F /* DataController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
-		45F5BAC329667F1C00F8990B /* CashedUser+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CashedUser+CoreDataClass.swift"; sourceTree = "<group>"; };
-		45F5BAC429667F1C00F8990B /* CashedUser+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CashedUser+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		456C9E0D296684780097CC4C /* Instafilter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Instafilter.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		456C9E10296684790097CC4C /* InstafilterApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstafilterApp.swift; sourceTree = "<group>"; };
+		456C9E12296684790097CC4C /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		456C9E14296684790097CC4C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		456C9E16296684790097CC4C /* Instafilter.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Instafilter.entitlements; sourceTree = "<group>"; };
+		456C9E18296684790097CC4C /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		4561317E29639FFD00A50043 /* Frameworks */ = {
+		456C9E0A296684780097CC4C /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -55,49 +33,38 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		4561317829639FFD00A50043 = {
+		456C9E04296684780097CC4C = {
 			isa = PBXGroup;
 			children = (
-				4561318329639FFD00A50043 /* Friends */,
-				4561318229639FFD00A50043 /* Products */,
+				456C9E0F296684780097CC4C /* Instafilter */,
+				456C9E0E296684780097CC4C /* Products */,
 			);
 			sourceTree = "<group>";
 		};
-		4561318229639FFD00A50043 /* Products */ = {
+		456C9E0E296684780097CC4C /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				4561318129639FFD00A50043 /* Friends.app */,
+				456C9E0D296684780097CC4C /* Instafilter.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		4561318329639FFD00A50043 /* Friends */ = {
+		456C9E0F296684780097CC4C /* Instafilter */ = {
 			isa = PBXGroup;
 			children = (
-				45F5BAC329667F1C00F8990B /* CashedUser+CoreDataClass.swift */,
-				45F5BAC429667F1C00F8990B /* CashedUser+CoreDataProperties.swift */,
-				456131972963A28200A50043 /* _friendface.json */,
-				456ABB88296557AB0045820F /* FriendFaceDataModel.xcdatamodeld */,
-				456ABB8B296558EA0045820F /* DataController.swift */,
-				4561318429639FFD00A50043 /* FriendsApp.swift */,
-				456131952963A21600A50043 /* BundleDecodable.swift */,
-				456131932963A08B00A50043 /* User.swift */,
-				4561318629639FFD00A50043 /* ContentView.swift */,
-				453F82602963FBB800C730E3 /* UserView.swift */,
-				4561FDFD29650523003A31E4 /* emojiList.json */,
-				4561FDFE29650523003A31E4 /* EmojiPickerView.swift */,
-				4561FE0129650550003A31E4 /* Emoji.swift */,
-				4561318829639FFE00A50043 /* Assets.xcassets */,
-				4561318A29639FFE00A50043 /* Friends.entitlements */,
-				4561318B29639FFE00A50043 /* Preview Content */,
+				456C9E10296684790097CC4C /* InstafilterApp.swift */,
+				456C9E12296684790097CC4C /* ContentView.swift */,
+				456C9E14296684790097CC4C /* Assets.xcassets */,
+				456C9E16296684790097CC4C /* Instafilter.entitlements */,
+				456C9E17296684790097CC4C /* Preview Content */,
 			);
-			path = Friends;
+			path = Instafilter;
 			sourceTree = "<group>";
 		};
-		4561318B29639FFE00A50043 /* Preview Content */ = {
+		456C9E17296684790097CC4C /* Preview Content */ = {
 			isa = PBXGroup;
 			children = (
-				4561318C29639FFE00A50043 /* Preview Assets.xcassets */,
+				456C9E18296684790097CC4C /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
 			sourceTree = "<group>";
@@ -105,39 +72,39 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		4561318029639FFD00A50043 /* Friends */ = {
+		456C9E0C296684780097CC4C /* Instafilter */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 4561319029639FFE00A50043 /* Build configuration list for PBXNativeTarget "Friends" */;
+			buildConfigurationList = 456C9E1C296684790097CC4C /* Build configuration list for PBXNativeTarget "Instafilter" */;
 			buildPhases = (
-				4561317D29639FFD00A50043 /* Sources */,
-				4561317E29639FFD00A50043 /* Frameworks */,
-				4561317F29639FFD00A50043 /* Resources */,
+				456C9E09296684780097CC4C /* Sources */,
+				456C9E0A296684780097CC4C /* Frameworks */,
+				456C9E0B296684780097CC4C /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = Friends;
-			productName = Friends;
-			productReference = 4561318129639FFD00A50043 /* Friends.app */;
+			name = Instafilter;
+			productName = Instafilter;
+			productReference = 456C9E0D296684780097CC4C /* Instafilter.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		4561317929639FFD00A50043 /* Project object */ = {
+		456C9E05296684780097CC4C /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1420;
 				LastUpgradeCheck = 1420;
 				TargetAttributes = {
-					4561318029639FFD00A50043 = {
+					456C9E0C296684780097CC4C = {
 						CreatedOnToolsVersion = 14.2;
 					};
 				};
 			};
-			buildConfigurationList = 4561317C29639FFD00A50043 /* Build configuration list for PBXProject "Friends" */;
+			buildConfigurationList = 456C9E08296684780097CC4C /* Build configuration list for PBXProject "Instafilter" */;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -145,53 +112,42 @@
 				en,
 				Base,
 			);
-			mainGroup = 4561317829639FFD00A50043;
-			productRefGroup = 4561318229639FFD00A50043 /* Products */;
+			mainGroup = 456C9E04296684780097CC4C;
+			productRefGroup = 456C9E0E296684780097CC4C /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				4561318029639FFD00A50043 /* Friends */,
+				456C9E0C296684780097CC4C /* Instafilter */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		4561317F29639FFD00A50043 /* Resources */ = {
+		456C9E0B296684780097CC4C /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4561318D29639FFE00A50043 /* Preview Assets.xcassets in Resources */,
-				4561318929639FFE00A50043 /* Assets.xcassets in Resources */,
-				4561FDFF29650523003A31E4 /* emojiList.json in Resources */,
-				456131982963A28200A50043 /* _friendface.json in Resources */,
+				456C9E19296684790097CC4C /* Preview Assets.xcassets in Resources */,
+				456C9E15296684790097CC4C /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		4561317D29639FFD00A50043 /* Sources */ = {
+		456C9E09296684780097CC4C /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				456131942963A08B00A50043 /* User.swift in Sources */,
-				456131962963A21600A50043 /* BundleDecodable.swift in Sources */,
-				453F82612963FBB800C730E3 /* UserView.swift in Sources */,
-				4561FE0029650523003A31E4 /* EmojiPickerView.swift in Sources */,
-				45F5BAC629667F1C00F8990B /* CashedUser+CoreDataProperties.swift in Sources */,
-				456ABB8C296558EA0045820F /* DataController.swift in Sources */,
-				456ABB8A296557AB0045820F /* FriendFaceDataModel.xcdatamodeld in Sources */,
-				4561FE0229650550003A31E4 /* Emoji.swift in Sources */,
-				4561318729639FFD00A50043 /* ContentView.swift in Sources */,
-				45F5BAC529667F1C00F8990B /* CashedUser+CoreDataClass.swift in Sources */,
-				4561318529639FFD00A50043 /* FriendsApp.swift in Sources */,
+				456C9E13296684790097CC4C /* ContentView.swift in Sources */,
+				456C9E11296684790097CC4C /* InstafilterApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
-		4561318E29639FFE00A50043 /* Debug */ = {
+		456C9E1A296684790097CC4C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -249,7 +205,7 @@
 			};
 			name = Debug;
 		};
-		4561318F29639FFE00A50043 /* Release */ = {
+		456C9E1B296684790097CC4C /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -300,15 +256,15 @@
 			};
 			name = Release;
 		};
-		4561319129639FFE00A50043 /* Debug */ = {
+		456C9E1D296684790097CC4C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = Friends/Friends.entitlements;
+				CODE_SIGN_ENTITLEMENTS = Instafilter/Instafilter.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"Friends/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"Instafilter/Preview Content\"";
 				DEVELOPMENT_TEAM = U526XBCKA2;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
@@ -328,7 +284,7 @@
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 13.1;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = Kurt.Lane.Friends;
+				PRODUCT_BUNDLE_IDENTIFIER = Kurt.Lane.Instafilter;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
@@ -338,15 +294,15 @@
 			};
 			name = Debug;
 		};
-		4561319229639FFE00A50043 /* Release */ = {
+		456C9E1E296684790097CC4C /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = Friends/Friends.entitlements;
+				CODE_SIGN_ENTITLEMENTS = Instafilter/Instafilter.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"Friends/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"Instafilter/Preview Content\"";
 				DEVELOPMENT_TEAM = U526XBCKA2;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
@@ -366,7 +322,7 @@
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 13.1;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = Kurt.Lane.Friends;
+				PRODUCT_BUNDLE_IDENTIFIER = Kurt.Lane.Instafilter;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
@@ -379,38 +335,25 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		4561317C29639FFD00A50043 /* Build configuration list for PBXProject "Friends" */ = {
+		456C9E08296684780097CC4C /* Build configuration list for PBXProject "Instafilter" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				4561318E29639FFE00A50043 /* Debug */,
-				4561318F29639FFE00A50043 /* Release */,
+				456C9E1A296684790097CC4C /* Debug */,
+				456C9E1B296684790097CC4C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		4561319029639FFE00A50043 /* Build configuration list for PBXNativeTarget "Friends" */ = {
+		456C9E1C296684790097CC4C /* Build configuration list for PBXNativeTarget "Instafilter" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				4561319129639FFE00A50043 /* Debug */,
-				4561319229639FFE00A50043 /* Release */,
+				456C9E1D296684790097CC4C /* Debug */,
+				456C9E1E296684790097CC4C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCVersionGroup section */
-		456ABB88296557AB0045820F /* FriendFaceDataModel.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				456ABB89296557AB0045820F /* FriendFaceDataModel.xcdatamodel */,
-			);
-			currentVersion = 456ABB89296557AB0045820F /* FriendFaceDataModel.xcdatamodel */;
-			path = FriendFaceDataModel.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
-	rootObject = 4561317929639FFD00A50043 /* Project object */;
+	rootObject = 456C9E05296684780097CC4C /* Project object */;
 }
