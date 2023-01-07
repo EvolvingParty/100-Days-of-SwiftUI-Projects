@@ -23,7 +23,7 @@ struct OnChangeView: View {
                 .onChange(of: blurAmount) { newValue in
                     print("New value is \(newValue)")
                 }
-
+            
             Button("Random Blur") {
                 blurAmount = Double.random(in: 0...20)
             }
@@ -57,7 +57,7 @@ struct ConfirmationView: View {
 struct ImageEffectsView: View {
     @State private var image: Image?
     @State private var originalImage: UIImage?
-    @Binding var inputImage: UIImage
+    @Binding var inputImage: UIImage?
     @State private var filterSelected = "Sepia"
     @State private var amount = 1.0
     @State private var maxAmount = 1.0
@@ -157,7 +157,7 @@ struct ImageEffectsView: View {
             let currentFilter = CIFilter.twirlDistortion()
             currentFilter.inputImage = beginImage
             currentFilter.radius = Float(amount)
-            currentFilter.center = CGPoint(x: inputImage.size.width / 2, y: inputImage.size.height / 2)
+            currentFilter.center = CGPoint(x: inputImage!.size.width / 2, y: inputImage!.size.height / 2)
             guard let outputImage = currentFilter.outputImage else {return}
             if let cgimg = context.createCGImage(outputImage, from: outputImage.extent) {
                 let uiImage = UIImage(cgImage: cgimg)
@@ -177,42 +177,42 @@ struct ImageEffectsView: View {
         }
     }
     
-//    func loadImage() {
-//        image = Image("Example")
-//        guard let inputImage = UIImage(named: "Example") else {return}
-//        let beginImage = CIImage(image: inputImage)
-//        let context = CIContext()
-//        let currentFilter = CIFilter.twirlDistortion()
-//        currentFilter.inputImage = beginImage
-//        let amount = 1.0
-//        let inputKeys = currentFilter.inputKeys
-//
-//        if inputKeys.contains(kCIInputIntensityKey) {
-//            currentFilter.setValue(amount, forKey: kCIInputIntensityKey)
-//        }
-//
-//        if inputKeys.contains(kCIInputRadiusKey) {
-//            currentFilter.setValue(amount * 200, forKey: kCIInputRadiusKey)
-//        }
-//
-//        if inputKeys.contains(kCIInputScaleKey) {
-//            currentFilter.setValue(amount * 10, forKey: kCIInputScaleKey)
-//        }
-//
-////        currentFilter.radius = Float(1000.0)
-////        currentFilter.center = CGPoint(x: inputImage.size.width / 2, y: inputImage.size.height / 2)
-//        guard let outputImage = currentFilter.outputImage else {return}
-//        if let cgimg = context.createCGImage(outputImage, from: outputImage.extent) {
-//            let uiImage = UIImage(cgImage: cgimg)
-//            image = Image(uiImage: uiImage)
-//        }
-//    }
+    //    func loadImage() {
+    //        image = Image("Example")
+    //        guard let inputImage = UIImage(named: "Example") else {return}
+    //        let beginImage = CIImage(image: inputImage)
+    //        let context = CIContext()
+    //        let currentFilter = CIFilter.twirlDistortion()
+    //        currentFilter.inputImage = beginImage
+    //        let amount = 1.0
+    //        let inputKeys = currentFilter.inputKeys
+    //
+    //        if inputKeys.contains(kCIInputIntensityKey) {
+    //            currentFilter.setValue(amount, forKey: kCIInputIntensityKey)
+    //        }
+    //
+    //        if inputKeys.contains(kCIInputRadiusKey) {
+    //            currentFilter.setValue(amount * 200, forKey: kCIInputRadiusKey)
+    //        }
+    //
+    //        if inputKeys.contains(kCIInputScaleKey) {
+    //            currentFilter.setValue(amount * 10, forKey: kCIInputScaleKey)
+    //        }
+    //
+    ////        currentFilter.radius = Float(1000.0)
+    ////        currentFilter.center = CGPoint(x: inputImage.size.width / 2, y: inputImage.size.height / 2)
+    //        guard let outputImage = currentFilter.outputImage else {return}
+    //        if let cgimg = context.createCGImage(outputImage, from: outputImage.extent) {
+    //            let uiImage = UIImage(cgImage: cgimg)
+    //            image = Image(uiImage: uiImage)
+    //        }
+    //    }
     
 }
 
 struct PHPickerView: View {
     @State private var image: Image?
-    @Binding var inputImage: UIImage
+    @Binding var inputImage: UIImage?
     @State private var isShowingImagePicker = false
     @State private var isShowingSaved = false
     var body: some View {
@@ -234,7 +234,7 @@ struct PHPickerView: View {
             Button(action: {
                 //guard let inputImage = inputImage else { return }
                 let imageSaver = ImageSaver()
-                imageSaver.writeToPhotoAlbum(image: inputImage)
+                imageSaver.writeToPhotoAlbum(image: inputImage!)
             }) {
                 HStack {
                     Image(systemName: "square.and.arrow.down")
@@ -248,23 +248,90 @@ struct PHPickerView: View {
         .onChange(of: inputImage) { _ in
             loadImage()
         }
-
+        
     }
     
     func loadImage() {
         //guard let inputImage = inputImage else {return}
-        image = Image(uiImage: inputImage)
+        image = Image(uiImage: inputImage!)
         
         //UIImageWriteToSavedPhotosAlbum(inputImage, nil, nil, nil)
     }
     
 }
-    
+
 struct ContentView: View {
     @State private var image: Image?
+    @State private var filterIntensity = 0.5
+    
+    @State private var isShowingImagePicker = false
+    @State private var inputImage: UIImage?
+    
+    @State private var currentFilter = CIFilter.sepiaTone()
+    let context = CIContext()
+    
     var body: some View {
-        VStack {
-            Text("Hello, world!")
+        NavigationView {
+            VStack {
+                ZStack {
+                    Group {
+                        Rectangle()
+                            .fill(.secondary.opacity(0.1))
+                        Text("Tap to select a picture")
+                            .font(.headline)
+                    }
+                    .opacity(image == nil ? 1.0 : 0.0)
+                    image?
+                        .resizable()
+                        .scaledToFit()
+                }
+                .onTapGesture {
+                    //select an image
+                    isShowingImagePicker.toggle()
+                }
+                .sheet(isPresented: $isShowingImagePicker) {
+                    ImagePicker(image: $inputImage)
+                }
+                
+                HStack {
+                    Text ("Intensity")
+                    Slider(value: $filterIntensity)
+                        .onChange(of: filterIntensity, perform:{ _ in applyProcessing()})
+                }.padding(.vertical)
+                HStack {
+                    Button("Change Filter") {
+                        // change filter
+                    }
+                    Spacer()
+                    Button("Save", action: save)
+                }
+            }
+            .padding([.horizontal,.bottom])
+            .navigationTitle("InstaFilter")
+            .onChange(of: inputImage) { _ in
+                loadImage()
+            }
+        }
+    }
+    
+    func loadImage() {
+        guard let inputImage = inputImage else {return}
+        //image = Image(uiImage: inputImage)
+        let beginImage = CIImage(image: inputImage)
+        currentFilter.setValue(beginImage, forKey: kCIInputImageKey)
+        applyProcessing()
+    }
+    
+    func save() {
+        
+    }
+    
+    func applyProcessing() {
+        currentFilter.intensity = Float(filterIntensity)
+        guard let outputImage = currentFilter.outputImage else {return}
+        if let cgimg = context.createCGImage(outputImage, from: outputImage .extent) {
+            let uiImage = UIImage(cgImage: cgimg)
+            image = Image(uiImage: uiImage)
         }
     }
 }

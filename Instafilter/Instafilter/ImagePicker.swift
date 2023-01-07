@@ -10,7 +10,7 @@ import SwiftUI
 
 struct ImagePicker: UIViewControllerRepresentable {
     
-    @Binding var image: UIImage
+    @Binding var image: UIImage?
     
     func makeCoordinator() -> Coordinator {
         Coordinator(self)
@@ -26,7 +26,7 @@ struct ImagePicker: UIViewControllerRepresentable {
             guard let provider = results.first?.itemProvider else {return}
             if provider.canLoadObject (ofClass: UIImage.self) {
                 provider.loadObject(ofClass: UIImage.self) { image,_ in
-                    self.parent.image = (image as? UIImage)!
+                    self.parent.image = image as? UIImage
                 }
             } else {}
         }
