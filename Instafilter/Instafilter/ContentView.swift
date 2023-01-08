@@ -271,6 +271,8 @@ public struct Filter: Identifiable {
 struct ContentView: View {
     @State private var image: Image?
     @State private var filterIntensity = 0.5
+    @State private var filterIRadius = 0.5
+    @State private var filterIScale = 0.5
     
     @State private var isShowingImagePicker = false
     @State private var inputImage: UIImage?
@@ -279,20 +281,16 @@ struct ContentView: View {
     @State private var currentFilter: CIFilter = CIFilter.sepiaTone()
     let context = CIContext()
     
+    @State private var showingInputIntensitySlider = true
+    @State private var showingInputRadiusSlider = false
+    @State private var showingInputScaleSlider = false
+    
     let availableFilters: [Filter] = [
-        //"Sepia":CIFilter.sepiaTone(),
-//        "Pixel":CIFilter.sepiaTone(),
-//        "Crystallize":CIFilter.sepiaTone(),
-//        "Twirl":CIFilter.sepiaTone(),
-//        "Sepia":CIFilter.sepiaTone(),
-//        "Pixel":CIFilter.sepiaTone(),
-//        "Crystallize":CIFilter.sepiaTone(),
-//        "Twirl":CIFilter.sepiaTone()
         Filter(name: "Sepia", filterType: CIFilter.sepiaTone(), exampleAmount: 1.0),
         Filter(name: "Pixellate", filterType: CIFilter.pixellate(), exampleAmount: 0.5),
         Filter(name: "Crystallize", filterType: CIFilter.crystallize(), exampleAmount: 0.8),
         Filter(name: "Edges", filterType: CIFilter.edges(), exampleAmount: 0.5),
-        Filter(name: "Gaussian", filterType: CIFilter.gaussianBlur(), exampleAmount: 1.0),
+        Filter(name: "Gaussian", filterType: CIFilter.gaussianBlur(), exampleAmount: 2.0),
         Filter(name: "Unsharp", filterType: CIFilter.unsharpMask(), exampleAmount: 1.0),
         Filter(name: "Vignette", filterType: CIFilter.vignette(), exampleAmount: 1.0)
     ]
@@ -379,11 +377,27 @@ struct ContentView: View {
                         }
                     }
                 }.frame(height: 105)
-                HStack {
-                    Text ("Intensity")
-                    Slider(value: $filterIntensity)
-                        .onChange(of: filterIntensity, perform:{ _ in applyProcessing()})
-                }.padding(.horizontal)
+                if showingInputIntensitySlider {
+                    HStack {
+                        Text ("Intensity")
+                        Slider(value: $filterIntensity, in: 0.1...1.0)
+                            .onChange(of: filterIntensity, perform:{ _ in applyProcessing()})
+                    }.padding(.horizontal)
+                }
+                if showingInputRadiusSlider {
+                    HStack {
+                        Text ("Radius")
+                        Slider(value: $filterIRadius, in: 0.1...1.0)
+                            .onChange(of: filterIRadius, perform:{ _ in applyProcessing()})
+                    }.padding(.horizontal)
+                }
+                if showingInputScaleSlider {
+                    HStack {
+                        Text ("Scale")
+                        Slider(value: $filterIScale, in: 0.1...1.0)
+                            .onChange(of: filterIScale, perform:{ _ in applyProcessing()})
+                    }.padding(.horizontal)
+                }
 //                HStack {
 //                    Button("Change Filter") {
 //                        // change filter
@@ -401,6 +415,7 @@ struct ContentView: View {
                     Button(action: save) {
                         Image(systemName: "square.and.arrow.down")
                     }
+                    .disabled(image == nil ? true : false)
                 }
             }
             .onChange(of: inputImage) { _ in
@@ -425,7 +440,18 @@ struct ContentView: View {
     
     func setFilter(_ filter: CIFilter) {
         currentFilter = filter
-        loadImage ( )
+        let inputKeys = currentFilter.inputKeys
+        withAnimation {
+            showingInputIntensitySlider = false
+            showingInputRadiusSlider = false
+            showingInputScaleSlider = false
+            for key in inputKeys {
+                if key == "inputIntensity" {showingInputIntensitySlider = true}
+                if key == "inputScale" {showingInputScaleSlider = true}
+                if key == "inputRadius" {showingInputRadiusSlider = true}
+            }
+        }
+        loadImage()
     }
     
     func loadImage() {
@@ -464,7 +490,7 @@ struct ContentView: View {
         exampleFilter.setValue(beginImage, forKey: kCIInputImageKey)
         let inputKeys = exampleFilter.inputKeys
         if inputKeys.contains(kCIInputIntensityKey) {
-            exampleFilter.setValue(Float(intensity), forKey: kCIInputIntensityKey)
+            exampleFilter.setValue(intensity, forKey: kCIInputIntensityKey)
         }
         if inputKeys.contains(kCIInputRadiusKey) {
             exampleFilter.setValue(intensity * 10, forKey: kCIInputRadiusKey)
@@ -495,7 +521,10 @@ struct ContentView: View {
             currentFilter.setValue(filterIntensity, forKey: kCIInputIntensityKey)
         }
         if inputKeys.contains(kCIInputRadiusKey) {
-            currentFilter.setValue(filterIntensity * 10, forKey: kCIInputRadiusKey)
+            currentFilter.setValue(filterIRadius * 20, forKey: kCIInputRadiusKey)
+        }
+        if inputKeys.contains(kCIInputScaleKey) {
+            currentFilter.setValue(filterIScale * 15, forKey: kCIInputScaleKey)
         }
         guard let outputImage = currentFilter.outputImage else {return}
         if let cgimg = context.createCGImage(outputImage, from: outputImage .extent) {
