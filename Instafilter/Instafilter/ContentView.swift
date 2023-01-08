@@ -260,15 +260,44 @@ struct PHPickerView: View {
     
 }
 
+
+public struct Filter: Identifiable {
+    public var id = UUID()
+    let name: String
+    let filterType: CIFilter
+    let exampleAmount: Double
+}
+
 struct ContentView: View {
     @State private var image: Image?
     @State private var filterIntensity = 0.5
     
     @State private var isShowingImagePicker = false
     @State private var inputImage: UIImage?
+    @State private var processedImage: UIImage?
     
-    @State private var currentFilter = CIFilter.sepiaTone()
+    @State private var currentFilter: CIFilter = CIFilter.sepiaTone()
     let context = CIContext()
+    
+    let availableFilters: [Filter] = [
+        //"Sepia":CIFilter.sepiaTone(),
+//        "Pixel":CIFilter.sepiaTone(),
+//        "Crystallize":CIFilter.sepiaTone(),
+//        "Twirl":CIFilter.sepiaTone(),
+//        "Sepia":CIFilter.sepiaTone(),
+//        "Pixel":CIFilter.sepiaTone(),
+//        "Crystallize":CIFilter.sepiaTone(),
+//        "Twirl":CIFilter.sepiaTone()
+        Filter(name: "Sepia", filterType: CIFilter.sepiaTone(), exampleAmount: 1.0),
+        Filter(name: "Pixellate", filterType: CIFilter.pixellate(), exampleAmount: 0.5),
+        Filter(name: "Crystallize", filterType: CIFilter.crystallize(), exampleAmount: 0.8),
+        Filter(name: "Edges", filterType: CIFilter.edges(), exampleAmount: 0.5),
+        Filter(name: "Gaussian", filterType: CIFilter.gaussianBlur(), exampleAmount: 1.0),
+        Filter(name: "Unsharp", filterType: CIFilter.unsharpMask(), exampleAmount: 1.0),
+        Filter(name: "Vignette", filterType: CIFilter.vignette(), exampleAmount: 1.0)
+    ]
+    
+    @State private var showingFiltersSelectionConfirmation = false
     
     var body: some View {
         NavigationView {
@@ -294,24 +323,109 @@ struct ContentView: View {
                 }
                 
                 HStack {
+                    ScrollView(.horizontal, showsIndicators: false) {
+                        HStack {
+                            ForEach(availableFilters) { filter in
+                                ZStack {
+                                    Rectangle()
+                                        .foregroundColor(.primary.opacity(0.05))
+                                    VStack {
+                                        Spacer()
+                                        Spacer().frame(maxHeight: 1.0)
+                                        if image == nil {
+                                            Rectangle()
+                                                .foregroundColor(.primary.opacity(0.05))
+                                                //.frame(width: 90, height: 75)
+                                                .padding(5)
+                                        }
+                                        exampleImage(filter.filterType, filter.exampleAmount)?
+                                            .resizable()
+                                            .scaledToFit()
+                                        Text(filter.name)
+                                            .font(.system(.footnote, design: .rounded).weight(.light))
+                                            .lineLimit(1)
+                                        Spacer()
+                                        Spacer().frame(maxHeight: 1.0)
+                                    }
+                                }
+                                .background(Color.primary.opacity(0.01))
+                                .frame(width: 100, height: 100)
+                                .padding(.bottom, 10)
+                                .onTapGesture(perform: { setFilter(filter.filterType)})
+//                                VStack(alignment: .center) {
+//                                    ZStack {
+//                                        VStack {
+//                                            Spacer()
+//                                            ZStack {
+//                                                if image == nil {
+//                                                    Rectangle()
+//                                                        .foregroundColor(.primary.opacity(0.05))
+//                                                        .frame(width: 90, height: 75)
+//                                                        .padding(.top)
+//                                                }
+//                                                image?
+//                                                    .resizable()
+//                                                    .scaledToFit()
+//                                            }
+//                                            Text(filter)
+//                                                .font(.system(.footnote, design: .rounded).weight(.light))
+//                                                .lineLimit(1)
+//                                                .padding(.bottom)
+//                                            Spacer()
+//                                        }
+//                                    }.frame(width: 100, height: 115)
+//                                }
+                            }
+                        }
+                    }
+                }.frame(height: 105)
+                HStack {
                     Text ("Intensity")
                     Slider(value: $filterIntensity)
                         .onChange(of: filterIntensity, perform:{ _ in applyProcessing()})
-                }.padding(.vertical)
-                HStack {
-                    Button("Change Filter") {
-                        // change filter
-                    }
-                    Spacer()
-                    Button("Save", action: save)
-                }
+                }.padding(.horizontal)
+//                HStack {
+//                    Button("Change Filter") {
+//                        // change filter
+//                        showingFiltersSelectionConfirmation.toggle()
+//                    }
+//                    Spacer()
+//                    //Button("Save", action: save)
+//                }
             }
             .padding([.horizontal,.bottom])
             .navigationTitle("InstaFilter")
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    //Button("Save", action: save)
+                    Button(action: save) {
+                        Image(systemName: "square.and.arrow.down")
+                    }
+                }
+            }
             .onChange(of: inputImage) { _ in
                 loadImage()
             }
+            .confirmationDialog("Select a filter", isPresented: $showingFiltersSelectionConfirmation) {
+                Button("Sepia") { setFilter(CIFilter.sepiaTone())}
+                Button("Pixelate") { setFilter(CIFilter.pixellate())}
+                Button("Crystallize") { setFilter(CIFilter.crystallize())}
+                Button("Twirl") { setFilter(CIFilter.twirlDistortion())}
+                Button( "Cancel", role: .cancel) { }
+            } message: {
+                Text("Select a new colour")
+            }
+            .alert(alertTitle, isPresented: $showingAlert) {
+                Button("OK", role: .cancel) {}
+            } message: {
+                Text(alertMessage)
+            }
         }
+    }
+    
+    func setFilter(_ filter: CIFilter) {
+        currentFilter = filter
+        loadImage ( )
     }
     
     func loadImage() {
@@ -323,11 +437,66 @@ struct ContentView: View {
     }
     
     func save() {
+        guard let processedImage = processedImage else {return}
+        let imageSaver = ImageSaver()
+        imageSaver.successHandler = {
+            showAlert(title: "Success", message: "Photo saved to library!")
+        }
+        imageSaver.errorHandler = {
+            showAlert(title: "Error", message: "Something went wrong! \($0.localizedDescription)")
+        }
+        imageSaver.writeToPhotoAlbum(image: processedImage)
+    }
+    
+    @State private var alertTitle = ""
+    @State private var alertMessage = ""
+    @State private var showingAlert = false
+    func showAlert(title: String, message: String) {
+        alertTitle = title
+        alertMessage = message
+        showingAlert = true
+    }
+    
+    func exampleImage(_ filter: CIFilter, _ intensity: Double) -> Image? {
+        guard let inputImage = inputImage else {return nil}
+        let exampleFilter = filter
+        let beginImage = CIImage(image: inputImage)
+        exampleFilter.setValue(beginImage, forKey: kCIInputImageKey)
+        let inputKeys = exampleFilter.inputKeys
+        if inputKeys.contains(kCIInputIntensityKey) {
+            exampleFilter.setValue(Float(intensity), forKey: kCIInputIntensityKey)
+        }
+        if inputKeys.contains(kCIInputRadiusKey) {
+            exampleFilter.setValue(intensity * 10, forKey: kCIInputRadiusKey)
+        }
+
+//        if inputKeys.contains(kCIInputRadiusKey) {
+//            currentFilter.setValue(intensity * 200, forKey: kCIInputRadiusKey)
+//        }
+//
+//        if inputKeys.contains(kCIInputScaleKey) {
+//            currentFilter.setValue(intensity * 10, forKey: kCIInputScaleKey)
+//        }
         
+        guard let outputImage = exampleFilter.outputImage else {return nil}
+        if let cgimg = context.createCGImage(outputImage, from: outputImage .extent) {
+            let uiImage = UIImage(cgImage: cgimg)
+            processedImage = uiImage
+            return Image(uiImage: uiImage)
+        }
+        return nil
     }
     
     func applyProcessing() {
-        currentFilter.intensity = Float(filterIntensity)
+        //currentFilter.intensity = Float(filterIntensity)
+        let inputKeys = currentFilter.inputKeys
+        print(inputKeys)
+        if inputKeys.contains(kCIInputIntensityKey) {
+            currentFilter.setValue(filterIntensity, forKey: kCIInputIntensityKey)
+        }
+        if inputKeys.contains(kCIInputRadiusKey) {
+            currentFilter.setValue(filterIntensity * 10, forKey: kCIInputRadiusKey)
+        }
         guard let outputImage = currentFilter.outputImage else {return}
         if let cgimg = context.createCGImage(outputImage, from: outputImage .extent) {
             let uiImage = UIImage(cgImage: cgimg)
