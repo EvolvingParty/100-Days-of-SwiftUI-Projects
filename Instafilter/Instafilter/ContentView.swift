@@ -273,6 +273,9 @@ struct ContentView: View {
     @State private var filterIntensity = 0.5
     @State private var filterIRadius = 0.5
     @State private var filterIScale = 0.5
+    @State private var hue = 0.6
+    @State private var filterSharpness = 0.5
+    @State private var filterWidth = 0.5
     
     @State private var isShowingImagePicker = false
     @State private var inputImage: UIImage?
@@ -284,6 +287,9 @@ struct ContentView: View {
     @State private var showingInputIntensitySlider = true
     @State private var showingInputRadiusSlider = false
     @State private var showingInputScaleSlider = false
+    @State private var showingInputSharpnessSlider = false
+    @State private var showingHueSlider = false
+    @State private var showingInputWidthSlider = false
     
     let availableFilters: [Filter] = [
         Filter(name: "Sepia", filterType: CIFilter.sepiaTone(), exampleAmount: 1.0),
@@ -292,7 +298,10 @@ struct ContentView: View {
         Filter(name: "Edges", filterType: CIFilter.edges(), exampleAmount: 0.5),
         Filter(name: "Gaussian", filterType: CIFilter.gaussianBlur(), exampleAmount: 2.0),
         Filter(name: "Unsharp", filterType: CIFilter.unsharpMask(), exampleAmount: 1.0),
-        Filter(name: "Vignette", filterType: CIFilter.vignette(), exampleAmount: 1.0)
+        Filter(name: "Vignette", filterType: CIFilter.vignette(), exampleAmount: 1.0),
+        Filter(name: "Bloom", filterType: CIFilter.bloom(), exampleAmount: 0.6),
+        Filter(name: "Circle", filterType: CIFilter.circularScreen(), exampleAmount: 0.6)
+        //Filter(name: "Hue", filterType: CIFilter.hueBlendMode(), exampleAmount: 0.6)
     ]
     
     @State private var showingFiltersSelectionConfirmation = false
@@ -398,6 +407,27 @@ struct ContentView: View {
                             .onChange(of: filterIScale, perform:{ _ in applyProcessing()})
                     }.padding(.horizontal)
                 }
+                if showingInputWidthSlider {
+                    HStack {
+                        Text ("Width")
+                        Slider(value: $filterWidth, in: 0...1.0)
+                            .onChange(of: filterWidth, perform:{ _ in applyProcessing()})
+                    }.padding(.horizontal)
+                }
+                if showingInputSharpnessSlider {
+                    HStack {
+                        Text ("Sharpness")
+                        Slider(value: $filterSharpness, in: 0...1.0)
+                            .onChange(of: filterSharpness, perform:{ _ in applyProcessing()})
+                    }.padding(.horizontal)
+                }
+                if showingHueSlider {
+                    HStack {
+                        Text ("Hue")
+                        Slider(value: $hue, in: 0...1.0)
+                            .onChange(of: hue, perform:{ _ in applyProcessing()})
+                    }.padding(.horizontal)
+                }
 //                HStack {
 //                    Button("Change Filter") {
 //                        // change filter
@@ -445,10 +475,15 @@ struct ContentView: View {
             showingInputIntensitySlider = false
             showingInputRadiusSlider = false
             showingInputScaleSlider = false
+            showingHueSlider = false
+            showingInputSharpnessSlider = false
             for key in inputKeys {
                 if key == "inputIntensity" {showingInputIntensitySlider = true}
                 if key == "inputScale" {showingInputScaleSlider = true}
                 if key == "inputRadius" {showingInputRadiusSlider = true}
+                if key == "inputBackgroundImage" {showingHueSlider = true}
+                if key == "inputWidth" {showingInputWidthSlider = true}
+                if key == "inputSharpness" {showingInputSharpnessSlider = true}
             }
         }
         loadImage()
@@ -526,6 +561,17 @@ struct ContentView: View {
         if inputKeys.contains(kCIInputScaleKey) {
             currentFilter.setValue(filterIScale * 15, forKey: kCIInputScaleKey)
         }
+        if inputKeys.contains(kCIInputWidthKey) {
+            currentFilter.setValue(filterWidth * 2, forKey: kCIInputWidthKey)
+        }
+        if inputKeys.contains(kCIInputSharpnessKey) {
+            currentFilter.setValue(filterSharpness, forKey: kCIInputSharpnessKey)
+        }
+//        if inputKeys.contains(kCIInputBackgroundImageKey) {
+//            let uiRedSquare = UIImage(named: "redSquare")!
+//            let redSquare = CIImage(image: uiRedSquare)
+//            currentFilter.setValue(redSquare, forKey: kCIInputBackgroundImageKey)
+//        }
         guard let outputImage = currentFilter.outputImage else {return}
         if let cgimg = context.createCGImage(outputImage, from: outputImage .extent) {
             let uiImage = UIImage(cgImage: cgimg)
