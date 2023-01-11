@@ -13,7 +13,9 @@ struct BucketListApp: App {
         WindowGroup {
             //ComparableView()
             //DocumentsDirectoryView()
-            EnumsView()
+            //EnumsView()
+            //IntegratingMapKit()
+            TouchIDAndFaceID()
             //ContentView()
         }
     }

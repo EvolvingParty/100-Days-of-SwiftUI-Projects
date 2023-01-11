@@ -92,6 +92,86 @@ struct EnumsView: View {
     }
 }
 
+import MapKit
+
+struct Location: Identifiable {
+    let id = UUID()
+    let name: String
+    let coordinate: CLLocationCoordinate2D
+}
+
+let locations = [
+    Location (name: "Buckingham Palace", coordinate: CLLocationCoordinate2D(latitude: 51.501, longitude: -0.141)),
+    Location (name: "Tower of London", coordinate: CLLocationCoordinate2D (latitude: 51.508, longitude: -0.076))
+]
+
+struct IntegratingMapKit: View {
+    @State private var mapRegion = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 51.5, longitude: -0.12), span: MKCoordinateSpan(latitudeDelta: 0.2, longitudeDelta: 0.2))
+    
+    var body: some View {
+        Map(coordinateRegion: $mapRegion, annotationItems: locations) { location in
+            //MapMarker(coordinate: location.coordinate)
+            MapAnnotation(coordinate: location.coordinate) {
+                VStack {
+//                    Circle()
+//                        .stroke(.red, lineWidth: 3)
+//                       .frame(width: 44, height: 44)
+                    Image(systemName: "star.fill")
+                        .imageScale(.large)
+                        .foregroundColor(.red)
+                        .padding(.vertical, 2.5)
+                    Text(location.name)
+                        .font(.system(.caption, design: .rounded).weight(.bold))
+                        .foregroundColor(.red)
+                }
+            }
+        }
+        
+    }
+}
+
+import LocalAuthentication
+struct TouchIDAndFaceID: View {
+    
+    @State private var isUnlocked = false
+    
+    var body: some View {
+        ZStack {
+            if isUnlocked {
+                Color.green.ignoresSafeArea()
+            } else {
+                Color.red.ignoresSafeArea()
+            }
+            Image(systemName: isUnlocked ? "lock.open.fill" : "lock.fill")
+                .font(.system(size: 100))
+                .onTapGesture {
+                    print("tapped")
+                    authenticate()
+                }
+        }
+    }
+    
+    func authenticate() {
+        let context = LAContext()
+        var error: NSError?
+        
+        if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) {
+            //Can use biometics
+            let reason = "Unlock the app data"
+            context.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: reason) { success, authenticationError in
+                if success {
+                    withAnimation {
+                        isUnlocked = true
+                    }
+                }
+                else {}
+            }
+        } else {
+            //no biometics
+        }
+    }
+}
+
 struct ContentView: View {
     var body: some View {
         Text("Hello, world!")
@@ -106,6 +186,10 @@ struct ContentView_Previews: PreviewProvider {
             .previewDisplayName("Documents directory")
         EnumsView()
             .previewDisplayName("Switching view states with enums")
+        IntegratingMapKit()
+            .previewDisplayName("Integrating MapKit")
+        TouchIDAndFaceID()
+            .previewDisplayName("Using Touch ID and Face ID")
         ContentView()
             .previewDisplayName("Bucket List")
     }
