@@ -94,15 +94,15 @@ struct EnumsView: View {
 
 import MapKit
 
-struct Location: Identifiable {
+struct IntegratingMapKitLocation: Identifiable {
     let id = UUID()
     let name: String
     let coordinate: CLLocationCoordinate2D
 }
 
 let locations = [
-    Location (name: "Buckingham Palace", coordinate: CLLocationCoordinate2D(latitude: 51.501, longitude: -0.141)),
-    Location (name: "Tower of London", coordinate: CLLocationCoordinate2D (latitude: 51.508, longitude: -0.076))
+    IntegratingMapKitLocation(name: "Buckingham Palace", coordinate: CLLocationCoordinate2D(latitude: 51.501, longitude: -0.141)),
+    IntegratingMapKitLocation(name: "Tower of London", coordinate: CLLocationCoordinate2D (latitude: 51.508, longitude: -0.076))
 ]
 
 struct IntegratingMapKit: View {
@@ -173,8 +173,63 @@ struct TouchIDAndFaceID: View {
 }
 
 struct ContentView: View {
+    @State private var mapRegion = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 50, longitude: 0), span: MKCoordinateSpan(latitudeDelta: 25, longitudeDelta: 25))
+    @State private var locations = [Location]()
+    @State private var selectedPlace: Location?
+    
     var body: some View {
-        Text("Hello, world!")
+        ZStack {
+            Map(coordinateRegion: $mapRegion, annotationItems: locations) { location in
+//                MapMarker(coordinate: CLLocationCoordinate2D(latitude: location.latitude, longitude: location.longitude))
+                MapAnnotation(coordinate: location.coordinate) {
+                    VStack {
+                        Image(systemName: "star.circle")
+                            .resizable()
+                            .foregroundColor(.red)
+                            .frame(width: 44, height: 44)
+                            .background(.white)
+                            .clipShape(Circle())
+                        Text(location.name)
+                            .fixedSize()
+                    }.onTapGesture {
+                        selectedPlace = location
+                    }
+                }
+            }
+            .ignoresSafeArea()
+            Circle()
+                .fill(.blue)
+                .opacity(0.3)
+                .frame(width: 32, height: 32)
+            VStack {
+              Spacer()
+                HStack {
+                    Spacer()
+                    Button {
+                        let newLocation = Location(id: UUID(), name: "New location", description: "", latitude: mapRegion.center.latitude, longitude: mapRegion.center.longitude)
+                        locations.append(newLocation)
+                    } label: {
+                        Image(systemName: "plus")
+                            .padding()
+                            .background(.green.opacity(0.95))
+                            .foregroundColor (.white)
+                            .font(.title)
+                            .clipShape(Circle ())
+                            .padding(.trailing)
+                    }
+                }
+            }
+        }
+        .sheet(item: $selectedPlace) { place in
+            //Text(place.name)
+            LocationEditView(location: place) { newLocation in
+                if let index = locations.firstIndex(of: place) {
+                    DispatchQueue.main.async {
+                        locations[index] = newLocation
+                    }
+                }
+            }
+        }
     }
 }
 
@@ -191,6 +246,6 @@ struct ContentView_Previews: PreviewProvider {
         TouchIDAndFaceID()
             .previewDisplayName("Using Touch ID and Face ID")
         ContentView()
-            .previewDisplayName("Bucket List")
+            .previewDisplayName("BucketList")
     }
 }

@@ -15,8 +15,8 @@ struct BucketListApp: App {
             //DocumentsDirectoryView()
             //EnumsView()
             //IntegratingMapKit()
-            TouchIDAndFaceID()
-            //ContentView()
+            //TouchIDAndFaceID()
+            ContentView()
         }
     }
 }

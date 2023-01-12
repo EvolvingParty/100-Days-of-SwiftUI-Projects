@@ -11,6 +11,8 @@
 		451FF6BA296D074200819C7D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451FF6B9296D074200819C7D /* ContentView.swift */; };
 		451FF6BC296D074400819C7D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 451FF6BB296D074400819C7D /* Assets.xcassets */; };
 		451FF6C0296D074400819C7D /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 451FF6BF296D074400819C7D /* Preview Assets.xcassets */; };
+		45CA3248296FAA7700AD90B6 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45CA3247296FAA7700AD90B6 /* Location.swift */; };
+		45CA324A296FB27700AD90B6 /* LocationEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45CA3249296FB27700AD90B6 /* LocationEditView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -20,6 +22,8 @@
 		451FF6BB296D074400819C7D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		451FF6BD296D074400819C7D /* BucketList.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BucketList.entitlements; sourceTree = "<group>"; };
 		451FF6BF296D074400819C7D /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		45CA3247296FAA7700AD90B6 /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
+		45CA3249296FB27700AD90B6 /* LocationEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationEditView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,6 +58,8 @@
 			children = (
 				451FF6B7296D074200819C7D /* BucketListApp.swift */,
 				451FF6B9296D074200819C7D /* ContentView.swift */,
+				45CA3249296FB27700AD90B6 /* LocationEditView.swift */,
+				45CA3247296FAA7700AD90B6 /* Location.swift */,
 				451FF6BB296D074400819C7D /* Assets.xcassets */,
 				451FF6BD296D074400819C7D /* BucketList.entitlements */,
 				451FF6BE296D074400819C7D /* Preview Content */,
@@ -140,7 +146,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				451FF6BA296D074200819C7D /* ContentView.swift in Sources */,
+				45CA3248296FAA7700AD90B6 /* Location.swift in Sources */,
 				451FF6B8296D074200819C7D /* BucketListApp.swift in Sources */,
+				45CA324A296FB27700AD90B6 /* LocationEditView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
