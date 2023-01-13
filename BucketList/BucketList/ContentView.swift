@@ -182,7 +182,7 @@ struct ContentView: View {
             Map(coordinateRegion: $mapRegion, annotationItems: locations) { location in
 //                MapMarker(coordinate: CLLocationCoordinate2D(latitude: location.latitude, longitude: location.longitude))
                 MapAnnotation(coordinate: location.coordinate) {
-                    VStack {
+                    ZStack {
                         Image(systemName: "star.circle")
                             .resizable()
                             .foregroundColor(.red)
@@ -191,6 +191,7 @@ struct ContentView: View {
                             .clipShape(Circle())
                         Text(location.name)
                             .fixedSize()
+                            .padding(.top, 66)
                     }.onTapGesture {
                         selectedPlace = location
                     }
@@ -208,6 +209,7 @@ struct ContentView: View {
                     Button {
                         let newLocation = Location(id: UUID(), name: "New location", description: "", latitude: mapRegion.center.latitude, longitude: mapRegion.center.longitude)
                         locations.append(newLocation)
+                        selectedPlace = newLocation
                     } label: {
                         Image(systemName: "plus")
                             .padding()
