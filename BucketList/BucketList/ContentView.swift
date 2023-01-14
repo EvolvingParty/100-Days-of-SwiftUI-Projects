@@ -173,65 +173,105 @@ struct TouchIDAndFaceID: View {
 }
 
 struct ContentView: View {
-    @State private var mapRegion = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 50, longitude: 0), span: MKCoordinateSpan(latitudeDelta: 25, longitudeDelta: 25))
-    @State private var locations = [Location]()
-    @State private var selectedPlace: Location?
+    @StateObject private var viewModel = ViewModel()
+    @State private var showingLocationsList = false
     
     var body: some View {
-        ZStack {
-            Map(coordinateRegion: $mapRegion, annotationItems: locations) { location in
-//                MapMarker(coordinate: CLLocationCoordinate2D(latitude: location.latitude, longitude: location.longitude))
-                MapAnnotation(coordinate: location.coordinate) {
-                    ZStack {
-                        Image(systemName: "star.circle")
-                            .resizable()
-                            .foregroundColor(.red)
-                            .frame(width: 44, height: 44)
-                            .background(.white)
-                            .clipShape(Circle())
-                        Text(location.name)
-                            .fixedSize()
-                            .padding(.top, 66)
-                    }.onTapGesture {
-                        selectedPlace = location
+        //if viewModel.isUnlocked {
+            ZStack {
+                Map(coordinateRegion: $viewModel.mapRegion, annotationItems: viewModel.locations) { location in
+                    //                MapMarker(coordinate: CLLocationCoordinate2D(latitude: location.latitude, longitude: location.longitude))
+                    MapAnnotation(coordinate: location.coordinate) {
+                        ZStack {
+                            Image(systemName: "star.circle")
+                                .resizable()
+                                .foregroundColor(.red)
+                                .frame(width: 44, height: 44)
+                                .background(.white)
+                                .clipShape(Circle())
+                            Text(location.name)
+                                .fixedSize()
+                                .padding(.top, 66)
+                        }.onTapGesture {
+                            viewModel.selectedPlace = location
+                        }
                     }
                 }
-            }
-            .ignoresSafeArea()
-            Circle()
-                .fill(.blue)
-                .opacity(0.3)
-                .frame(width: 32, height: 32)
-            VStack {
-              Spacer()
-                HStack {
+                .ignoresSafeArea()
+                Circle()
+                    .fill(.blue)
+                    .opacity(0.3)
+                    .frame(width: 32, height: 32)
+                VStack {
                     Spacer()
-                    Button {
-                        let newLocation = Location(id: UUID(), name: "New location", description: "", latitude: mapRegion.center.latitude, longitude: mapRegion.center.longitude)
-                        locations.append(newLocation)
-                        selectedPlace = newLocation
-                    } label: {
-                        Image(systemName: "plus")
-                            .padding()
-                            .background(.green.opacity(0.95))
-                            .foregroundColor (.white)
-                            .font(.title)
-                            .clipShape(Circle ())
-                            .padding(.trailing)
+                    HStack {
+                        Spacer()
+                        VStack {
+                            Button {
+                                showingLocationsList.toggle()
+                            } label: {
+                                Image(systemName: "list.star")
+                                    .padding()
+                                    .background(.primary.opacity(0.15))
+                                    .foregroundColor(.primary)
+                                    .font(.title)
+                                    .clipShape(Circle())
+                                    .padding(.trailing)
+                            }
+                            Button {
+                                viewModel.addNewLocation()
+                            } label: {
+                                Image(systemName: "plus")
+                                    .padding()
+                                    .background(.green.opacity(0.95))
+                                    .foregroundColor(.white)
+                                    .font(.title)
+                                    .clipShape(Circle ())
+                                    .padding(.trailing)
+                            }
+                        }
+                    }
+                }
+                if viewModel.isUnlocked == false {
+                    ZStack {
+                        Rectangle()
+                            .ignoresSafeArea()
+                            .background(.ultraThinMaterial)
+                        Button ("Unlock Places") {
+                            viewModel.authenticate()
+                        }
+                        .padding()
+                        .background(.blue)
+                        .foregroundColor(.white)
+                        .clipShape(Capsule())
                     }
                 }
             }
-        }
-        .sheet(item: $selectedPlace) { place in
-            //Text(place.name)
-            LocationEditView(location: place) { newLocation in
-                if let index = locations.firstIndex(of: place) {
-                    DispatchQueue.main.async {
-                        locations[index] = newLocation
-                    }
+            .sheet(item: $viewModel.selectedPlace) { place in
+                //Text(place.name)
+                LocationEditView(location: place) { newLocation in
+                    viewModel.update(location: newLocation)
                 }
             }
-        }
+            .sheet(isPresented: $showingLocationsList) {
+                PlaceList(locationsList: $viewModel.locations, mapRegion: $viewModel.mapRegion)
+            }
+//        } else {
+//            ZStack {
+//                Map(coordinateRegion: $viewModel.mapRegion)
+//                    .ignoresSafeArea()
+//                Rectangle()
+//                    .ignoresSafeArea()
+//                    .background(.ultraThinMaterial)
+//                Button ("Unlock Places") {
+//                    viewModel.authenticate ()
+//                }
+//                .padding()
+//                .background(. blue)
+//                .foregroundColor(.white)
+//                .clipShape (Capsule ( ))
+//            }
+//        }
     }
 }
 

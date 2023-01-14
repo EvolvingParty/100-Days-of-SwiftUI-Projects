@@ -9,11 +9,13 @@ import SwiftUI
 
 struct LocationEditView: View {
     @Environment(\.dismiss) var dismiss
-    var location: Location
-    var onSave: (Location) -> Void
+    @Environment(\.dismissSearch) var dismissSearch
     
-    @State private var name: String
-    @State private var description: String
+    public var location: Location
+    public var onSave: (Location) -> Void
+    
+    @State var name: String
+    @State var description: String
     
     enum LoadingState {
         case loading, loaded, failed
@@ -22,6 +24,20 @@ struct LocationEditView: View {
     @State private var loadingState = LoadingState.loading
     @State private var pages = [Page]()
     
+    @State private var searchText = ""
+    
+    var filteredResults: [Page] {
+        if searchText.isEmpty {
+            return pages
+        } else {
+            var pagesToReturn = [Page]()
+            for page in pages {
+                if page.title.lowercased().contains(searchText.lowercased()) || page.description.lowercased().contains(searchText.lowercased()) { pagesToReturn.append(page) }
+            }
+            return pagesToReturn
+        }
+    }
+    
     init(location: Location, onSave: @escaping (Location) -> Void) {
         self.location = location
         self.onSave = onSave
@@ -29,36 +45,100 @@ struct LocationEditView: View {
         _description = State(initialValue: location.description)
     }
     
+    struct SearchableListView: View {
+        @Environment(\.isSearching) var isSearching
+        @Environment(\.dismissSearch) var dismissSearch
+        var filteredResults: [Page]
+        @Binding var name: String
+        @Binding var description: String
+        
+        var body: some View {
+//                List {
+//                    Text("Search Bar")
+//                }
+//                VStack(alignment: .center) {
+//                    Text(isSearching ? "Searching" : "Not Searching")
+//                }
+            if filteredResults.isEmpty {
+                VStack {
+                    HStack {
+                        Spacer()
+                        Text("No results…")
+                            .font(.caption)
+                            .foregroundColor(.secondary)
+                        Spacer()
+                    }
+                    HStack {
+                        Spacer()
+                        Text("Try a different search.")
+                            .font(.caption)
+                            .foregroundColor(.secondary)
+                        Spacer()
+                    }
+                }
+                .listRowBackground(Color.clear)
+            }
+            else {
+                ForEach(filteredResults, id: \.self) { page in
+                    Button {
+                        name = page.title
+                        description = page.description
+                        dismissSearch()
+                        //                        withAnimation {
+                        //                            proxy.scrollTo(101)
+                        //                        }
+                    } label: {
+                        Text(page.title)
+                            .font(.system(.body, design: .rounded).weight(.semibold))
+                        + Text(": ")
+                        + Text(page.description)
+                            .font(.system(.body, design: .rounded))
+                    }.foregroundColor(.primary)
+                }
+            }
+        }
+    }
+    
     var body: some View {
         NavigationView {
-            Form {
-                
-                Section {
-                    TextField("Placename", text: $name)
-                    TextField("Description", text: $description)
-                }
-                
-                Section {
-                    if loadingState == .loading {Text("Loading…")}
-                    else if loadingState == .failed {Text("There was an error loading the data.")}
-                    else {
-                        ForEach(pages, id: \.self) { page in
-                            Button {
-                                name = page.title
-                                description = page.description
-                            } label: {
-                                Text(page.title)
-                                    .font(.system(.body, design: .rounded).weight(.semibold))
-                                + Text(": ")
-                                + Text(page.description)
-                                    .font(.system(.body, design: .rounded))
-                            }.foregroundColor(.primary)
-                        }
+            ScrollViewReader { proxy in
+                List {
+                    
+                    Section {
+                        TextField("Placename", text: $name)
+                            .id(101)
+                        TextField("Description", text: $description)
+                    } header: {
+                        Text("PLace details")
                     }
-                } header: {
-                    Text("Nearby…")
-                }
-                
+                    
+                    Section {
+                        if loadingState == .loading {Text("Loading…")}
+                        else if loadingState == .failed {Text("There was an error loading the data.")}
+                        else {
+                            SearchableListView(filteredResults: filteredResults, name: $name, description: $description)
+                                
+//                            ForEach(filteredResults, id: \.self) { page in
+//                                Button {
+//                                    name = page.title
+//                                    description = page.description
+//                                    dismissSearch()
+//                                    withAnimation {
+//                                        proxy.scrollTo(101)
+//                                    }
+//                                } label: {
+//                                    Text(page.title)
+//                                        .font(.system(.body, design: .rounded).weight(.semibold))
+//                                    + Text(": ")
+//                                    + Text(page.description)
+//                                        .font(.system(.body, design: .rounded))
+//                                }.foregroundColor(.primary)
+//                            }
+                        }
+                    } header: {
+                        Text("Nearby…")
+                    }
+                }.searchable(text: $searchText, placement: .toolbar)
             }
             .navigationTitle ("Place details")
             .toolbar {
