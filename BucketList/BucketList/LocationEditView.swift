@@ -38,11 +38,22 @@ struct LocationEditView: View {
         }
     }
     
+    private var initialName = ""
+    private var initialDescription = ""
+    
+    private var hasChanges: Bool {
+        name != initialName || description != initialDescription
+    }
+    
+    @State private var showingConfirmationAlert = false
+    
     init(location: Location, onSave: @escaping (Location) -> Void) {
         self.location = location
         self.onSave = onSave
         _name = State(initialValue: location.name)
+        initialName = location.name
         _description = State(initialValue: location.description)
+        initialDescription = location.description
     }
     
     struct SearchableListView: View {
@@ -140,15 +151,47 @@ struct LocationEditView: View {
                     }
                 }.searchable(text: $searchText, placement: .toolbar)
             }
-            .navigationTitle ("Place details")
+            .alert("Discard changes", isPresented: $showingConfirmationAlert) {
+                Button("Discard", role: .destructive) {dismiss()}
+            }
+            .navigationTitle (name)
             .toolbar {
-                Button("Save") {
-                    var newLocation = location
-                    newLocation.id = UUID()
-                    newLocation.name = name
-                    newLocation.description = description
-                    onSave(newLocation)
-                    dismiss()
+                if hasChanges {
+                    ToolbarItem(placement: .navigationBarLeading) {
+                        Button("Cancel") {
+                            showingConfirmationAlert.toggle()
+                        }
+                    }
+                    ToolbarItem(placement: .navigationBarTrailing) {
+                        Button("Save") {
+                            var newLocation = location
+                            newLocation.id = UUID()
+                            newLocation.name = name
+                            newLocation.description = description
+                            onSave(newLocation)
+                            dismiss()
+                        }
+                        .fontWeight(.bold)
+                    }
+                } else {
+                    ToolbarItem(placement: .navigationBarTrailing) {
+                       Button {
+                           dismiss()
+                       } label: {
+                           ZStack {
+                               Circle()
+                                   .frame(width: 30, height: 30)
+                                   .foregroundColor(Color(.secondarySystemFill))
+                               Image(systemName: "xmark")
+                                   .font(Font.body.weight(.bold))
+                                   .foregroundColor(.secondary)
+                                   .imageScale(.small)
+                                   .frame(width: 44, height: 44)
+                           }
+                           .padding(.trailing, -5)
+                           .padding(.top, 10)
+                       }
+                    }
                 }
             }
             .task{ await fetchNearbyPlaces() }

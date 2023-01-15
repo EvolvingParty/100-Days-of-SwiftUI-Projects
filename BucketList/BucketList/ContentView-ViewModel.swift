@@ -51,7 +51,7 @@ extension ContentView {
             }
         }
         
-        func authenticate() {
+        func authenticate(onSuccess: @escaping () -> Void, onFailed: @escaping (String) -> Void) {
             let context = LAContext()
             var error: NSError?
             
@@ -70,9 +70,11 @@ extension ContentView {
                         }
                     } else {
                         //Did not unlock
+                        onFailed("Did not unlock device")
                     }
                 }
             } else {
+                onFailed(error?.localizedDescription ?? "No biometics available")
                 //No biometics. Show passcode.
             }
         }

@@ -176,6 +176,9 @@ struct ContentView: View {
     @StateObject private var viewModel = ViewModel()
     @State private var showingLocationsList = false
     
+    @State private var failedAlertMessage = ""
+    @State private var showingFailedAlert = false
+    
     var body: some View {
         //if viewModel.isUnlocked {
             ZStack {
@@ -238,7 +241,10 @@ struct ContentView: View {
                             .ignoresSafeArea()
                             .background(.ultraThinMaterial)
                         Button ("Unlock Places") {
-                            viewModel.authenticate()
+                            viewModel.authenticate(onSuccess: {}, onFailed: { message in
+                                failedAlertMessage = message
+                                showingFailedAlert = true
+                            })
                         }
                         .padding()
                         .background(.blue)
@@ -254,7 +260,10 @@ struct ContentView: View {
                 }
             }
             .sheet(isPresented: $showingLocationsList) {
-                PlaceList(locationsList: $viewModel.locations, mapRegion: $viewModel.mapRegion)
+                PlaceList(locationsList: $viewModel.locations, mapRegion: $viewModel.mapRegion, onDelete: { viewModel.save() })
+            }
+            .alert(isPresented: $showingFailedAlert) {
+                Alert(title: Text("Authenticaion Failed"), message: Text(failedAlertMessage), dismissButton: .default(Text("OK")))
             }
 //        } else {
 //            ZStack {

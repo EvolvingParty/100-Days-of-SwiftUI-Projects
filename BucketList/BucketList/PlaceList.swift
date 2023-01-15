@@ -12,6 +12,9 @@ struct PlaceList: View {
     @Environment(\.dismiss) var dismiss
     @Binding var locationsList: [Location]
     @Binding var mapRegion: MKCoordinateRegion
+    
+    public var onDelete: () -> Void
+    
     var body: some View {
         NavigationView {
             List {
@@ -19,7 +22,7 @@ struct PlaceList: View {
                     Button {
                             dismiss()
                         withAnimation {
-                            mapRegion = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: place.latitude, longitude: place.longitude), span: MKCoordinateSpan(latitudeDelta: 15, longitudeDelta: 15))
+                            mapRegion = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: place.latitude, longitude: place.longitude), span: MKCoordinateSpan(latitudeDelta: 5, longitudeDelta: 5))
                         }
                     } label: {
                         Text(place.name)
@@ -61,11 +64,12 @@ struct PlaceList: View {
     
     func removePlace(at offsets: IndexSet) {
         locationsList.remove(atOffsets: offsets)
+        onDelete()
     }
 }
 
 struct PlaceList_Previews: PreviewProvider {
     static var previews: some View {
-        PlaceList(locationsList: .constant([]), mapRegion: .constant(MKCoordinateRegion()))
+        PlaceList(locationsList: .constant([]), mapRegion: .constant(MKCoordinateRegion())) {}
     }
 }
