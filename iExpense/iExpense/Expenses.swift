@@ -36,17 +36,19 @@ class Expenses: ObservableObject {
     }
     
     init() {
-        if let savedPersonalItems = UserDefaults.standard.data(forKey: "PersoonalItems"), let savedBusinessItems = UserDefaults.standard.data(forKey: "BusinessItems") {
+        if let savedPersonalItems = UserDefaults.standard.data(forKey: "PersoonalItems") {
             if let decodedItems = try? JSONDecoder().decode([ExpenseItem].self, from: savedPersonalItems) {
                 persoonalItems = decodedItems
-            } else {
-                persoonalItems = []
+                return
             }
+            persoonalItems = []
+        }
+        if let savedBusinessItems = UserDefaults.standard.data(forKey: "BusinessItems") {
             if let decodedItems = try? JSONDecoder().decode([ExpenseItem].self, from: savedBusinessItems) {
                 businessItems = decodedItems
-            } else {
-                businessItems = []
+                return
             }
+            businessItems = []
         }
     }
     

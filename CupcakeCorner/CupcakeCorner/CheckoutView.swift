@@ -19,8 +19,10 @@ struct CheckoutView: View {
                     image
                         .resizable()
                         .scaledToFit()
+                        .accessibilityHidden(true)
                 } placeholder: {
                     ProgressView()
+                        .accessibilityHidden(true)
                 }.frame(height: 233)
                 Text("Your total is \(order.cost, format: .currency (code: "USD"))")
                     .font(.system(.title, design: .rounded))

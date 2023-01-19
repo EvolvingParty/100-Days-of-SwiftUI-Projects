@@ -12,8 +12,8 @@ struct Location: Identifiable, Codable, Equatable {
     var id: UUID
     var name: String
     var description: String
-    let latitude: Double
-    let longitude: Double
+    var latitude: Double
+    var longitude: Double
     
     var coordinate: CLLocationCoordinate2D {
         CLLocationCoordinate2D(latitude: latitude, longitude: longitude)

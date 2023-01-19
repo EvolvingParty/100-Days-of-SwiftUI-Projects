@@ -109,6 +109,9 @@ struct ContentView: View {
             }
 
         }
+        .accessibilityElement()
+        .accessibilityLabel("\(item.name) \(item.amount, format: .currency(code: Locale.current.currency?.identifier ?? "USD"))")
+        .accessibilityHint("Category: \(item.type).. Purchased:  \(item.date.formatted(date: .numeric, time: .shortened))")
     }
     
 }

@@ -66,8 +66,11 @@ struct ContentView: View {
                         HStack {
                             Image(systemName: "\(word.count).circle.fill")
                                 .imageScale(.large)
+                                .padding(.vertical, 5)
                             Text(word)
                         }
+                        .accessibilityElement() //ignores by default
+                        .accessibilityLabel("\(word), \(word.count) letters")
                     }
                 }
             }
@@ -80,8 +83,10 @@ struct ContentView: View {
                             .font(.footnote)
                         Text(score, format: .number).font(.system(.largeTitle, design: .rounded).weight(.bold))
                             .foregroundColor(.blue)
-                    }.padding(.leading, 15)
-                        .padding(.top, 15)
+                    }
+                    .padding(.leading, 15)
+                    .padding(.top, 15)
+                    .accessibilityElement(children: .combine)
                 })
                 ToolbarItem(placement: .navigationBarTrailing, content: {
                     Button(action: {
@@ -104,7 +109,7 @@ struct ContentView: View {
                             .padding(.top, 15)
                         Text(rootWord.lowercased()).font(.system(.largeTitle, design: .rounded).weight(.bold))
                             .foregroundColor(.blue)
-                    }
+                    }.accessibilityElement(children: .combine)
                 }
             }
             .onSubmit {

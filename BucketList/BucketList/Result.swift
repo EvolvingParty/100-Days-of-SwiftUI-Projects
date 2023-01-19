@@ -28,3 +28,27 @@ struct Page: Codable, Hashable, Comparable {
         terms?["description"]?.first ?? "No further information"
     }
 }
+
+struct LocationResult: Codable {
+    let query: LocationQuery
+}
+
+struct LocationQuery: Codable {
+    let geosearch: [LocationPage]
+}
+
+struct LocationPage: Codable, Hashable, Comparable {
+    let pageid: Int
+    let title: String
+    let lat: Double
+    let lon: Double
+    let dist: Double
+
+    static func < (lhs: LocationPage, rhs: LocationPage) -> Bool {
+        lhs.dist < rhs.dist
+    }
+    
+//    var description: String {
+//        terms?["description"]?.first ?? "No further information"
+//    }
+}
