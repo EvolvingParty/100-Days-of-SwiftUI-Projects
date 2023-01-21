@@ -20,6 +20,8 @@ extension Thing {
     @NSManaged public var imageUUID: String?
     @NSManaged public var name: String?
     @NSManaged public var notes: String?
+    @NSManaged public var longitude: Double
+    @NSManaged public var latitude: Double
     
     public var wrappedName: String {
         name ?? "No name"
@@ -57,5 +59,11 @@ extension Thing {
 }
 
 extension Thing : Identifiable {
-
+//    static var exampleThing: Thing {
+//        let childContext = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
+//        let exampleThing = Thing(context: childContext)
+//        exampleThing.name = "Example Thing"
+//        exampleThing.dateTime = Date.now
+//        return exampleThing
+//    }
 }

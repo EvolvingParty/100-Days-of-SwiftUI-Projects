@@ -14,11 +14,13 @@
 		454B6BFA2978DE49005D41E2 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 454B6BF82978DE49005D41E2 /* ImagePicker.swift */; };
 		454B6BFB2978DE49005D41E2 /* ImageSaver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 454B6BF92978DE49005D41E2 /* ImageSaver.swift */; };
 		454B6BFD2978DFC0005D41E2 /* CreateNewThingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 454B6BFC2978DFC0005D41E2 /* CreateNewThingView.swift */; };
+		45A445C0297AAB0C0084A9FB /* LocationFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A445BF297AAB0C0084A9FB /* LocationFetcher.swift */; };
 		45CC86862977FF5300F947F1 /* RememberThingsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45CC86852977FF5300F947F1 /* RememberThingsApp.swift */; };
 		45CC86882977FF5300F947F1 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45CC86872977FF5300F947F1 /* ContentView.swift */; };
 		45CC868A2977FF5400F947F1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 45CC86892977FF5400F947F1 /* Assets.xcassets */; };
 		45CC868E2977FF5400F947F1 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 45CC868D2977FF5400F947F1 /* Preview Assets.xcassets */; };
 		45CC8696297800AB00F947F1 /* RememberThingsModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 45CC8694297800AB00F947F1 /* RememberThingsModel.xcdatamodeld */; };
+		45D6A880297938D100F1C536 /* ThingDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D6A87F297938D100F1C536 /* ThingDetailView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,6 +31,7 @@
 		454B6BF82978DE49005D41E2 /* ImagePicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		454B6BF92978DE49005D41E2 /* ImageSaver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageSaver.swift; sourceTree = "<group>"; };
 		454B6BFC2978DFC0005D41E2 /* CreateNewThingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateNewThingView.swift; sourceTree = "<group>"; };
+		45A445BF297AAB0C0084A9FB /* LocationFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationFetcher.swift; sourceTree = "<group>"; };
 		45CC86822977FF5300F947F1 /* RememberThings.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RememberThings.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		45CC86852977FF5300F947F1 /* RememberThingsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RememberThingsApp.swift; sourceTree = "<group>"; };
 		45CC86872977FF5300F947F1 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -36,6 +39,7 @@
 		45CC868B2977FF5400F947F1 /* RememberThings.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = RememberThings.entitlements; sourceTree = "<group>"; };
 		45CC868D2977FF5400F947F1 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		45CC8695297800AB00F947F1 /* RememberThingsModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = RememberThingsModel.xcdatamodel; sourceTree = "<group>"; };
+		45D6A87F297938D100F1C536 /* ThingDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThingDetailView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,6 +82,8 @@
 				454B6BF82978DE49005D41E2 /* ImagePicker.swift */,
 				454B6BF92978DE49005D41E2 /* ImageSaver.swift */,
 				454B6BFC2978DFC0005D41E2 /* CreateNewThingView.swift */,
+				45D6A87F297938D100F1C536 /* ThingDetailView.swift */,
+				45A445BF297AAB0C0084A9FB /* LocationFetcher.swift */,
 				45CC86892977FF5400F947F1 /* Assets.xcassets */,
 				45CC868B2977FF5400F947F1 /* RememberThings.entitlements */,
 				45CC868C2977FF5400F947F1 /* Preview Content */,
@@ -165,6 +171,7 @@
 			files = (
 				45CC8696297800AB00F947F1 /* RememberThingsModel.xcdatamodeld in Sources */,
 				454B6BF32978DB9F005D41E2 /* DataController.swift in Sources */,
+				45A445C0297AAB0C0084A9FB /* LocationFetcher.swift in Sources */,
 				454B6BF62978DBC6005D41E2 /* Thing+CoreDataClass.swift in Sources */,
 				454B6BFD2978DFC0005D41E2 /* CreateNewThingView.swift in Sources */,
 				454B6BFA2978DE49005D41E2 /* ImagePicker.swift in Sources */,
@@ -172,6 +179,7 @@
 				454929DF297906D300832FD2 /* FileManager-DocumentsDirectory.swift in Sources */,
 				454B6BF72978DBC6005D41E2 /* Thing+CoreDataProperties.swift in Sources */,
 				45CC86862977FF5300F947F1 /* RememberThingsApp.swift in Sources */,
+				45D6A880297938D100F1C536 /* ThingDetailView.swift in Sources */,
 				454B6BFB2978DE49005D41E2 /* ImageSaver.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -303,6 +311,7 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Remember Things would like to access your location when adding a new thing";
 				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "Remember Things would like to add a photo to your photo library";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Remember Things would like to access photos from your photo library to add to your list of Things";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
@@ -343,6 +352,7 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Remember Things would like to access your location when adding a new thing";
 				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "Remember Things would like to add a photo to your photo library";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Remember Things would like to access photos from your photo library to add to your list of Things";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;

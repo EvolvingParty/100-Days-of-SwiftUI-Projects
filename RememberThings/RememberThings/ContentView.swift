@@ -17,21 +17,24 @@ struct ContentView: View {
         NavigationView {
             List {
                 ForEach(things) { thing in
-                    HStack {
-                        thing.wrappedImage
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: 60, height: 60)
-                        VStack(alignment: .leading) {
-                            Text(thing.wrappedName)
-                                .font(.system(.headline,design: .rounded).weight(.bold))
-                            Text(thing.wrappedDateTime)
-                                .font(.footnote)
-                                .foregroundColor(.secondary)
-                        }.padding(.horizontal, 10)
+                    NavigationLink {
+                        ThingDetailView(recievedThing: thing, thingImage: thing.wrappedImage)
+                    } label: {
+                        HStack {
+                            thing.wrappedImage
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 60, height: 60)
+                            VStack(alignment: .leading) {
+                                Text(thing.wrappedName)
+                                    .font(.system(.headline,design: .rounded).weight(.bold))
+                                Text(thing.wrappedDateTime)
+                                    .font(.footnote)
+                                    .foregroundColor(.secondary)
+                            }.padding(.horizontal, 10)
+                        }
                     }
-                }
-                .onDelete(perform: deleteThing)
+                }.onDelete(perform: deleteThing)
             }
             .sheet(isPresented: $isShowingCreateNewThingView) {
                 CreateNewThingView()

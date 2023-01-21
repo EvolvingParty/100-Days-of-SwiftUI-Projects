@@ -21,6 +21,11 @@ struct CreateNewThingView: View {
     @State var thingNotes: String = ""
     @State var thingDateTime = Date.now
     
+    //Day 78
+    let locationFetcher = LocationFetcher()
+    @State var userLatitude: Double = 0.0
+    @State var userLongitude: Double = 0.0
+
     var body: some View {
         NavigationView {
             VStack {
@@ -32,9 +37,8 @@ struct CreateNewThingView: View {
                             .padding()
                     }
                     Form {
+                        
                         HStack {
-                            //                            Text(thingDateTime, style: .date)
-                            //                            Text(thingDateTime, style: .time)
                             DatePicker("Time", selection: $thingDateTime, displayedComponents: .hourAndMinute)
                             DatePicker("Date", selection: $thingDateTime, displayedComponents: .date)
                         }
@@ -42,8 +46,17 @@ struct CreateNewThingView: View {
                         .colorInvert()
                         .colorMultiply(.blue)
                         .padding(.vertical, 5)
+                        
+                        HStack {
+                            Text("\(userLatitude), ")
+                            Text("\(userLongitude)")
+                        }
+                        .foregroundColor(.secondary)
+
                         TextField("Give this image a memorable name", text: $thingName)
+                        
                         TextField("Notes", text: $thingNotes)
+                        
                     }
                 } else {
                     ZStack {
@@ -58,6 +71,11 @@ struct CreateNewThingView: View {
                     }
                 }
             }
+            .onAppear(perform: {
+                self.locationFetcher.start()
+                updateLocation()
+            })
+            .onChange(of: locationFetcher.lastKnownLocation?.latitude, perform: { _ in updateLocation() })
             .navigationTitle("Remember new thing")
             .navigationBarTitleDisplayMode(.inline)
             .alert("Discard changes", isPresented: $showingConfirmationAlert) {
@@ -77,9 +95,13 @@ struct CreateNewThingView: View {
                             let newThing = Thing(context: moc)
                             newThing.name = thingName
                             newThing.dateTime = thingDateTime
-                            newThing.notes = thingNotes
+                            if thingNotes != "" {
+                                newThing.notes = thingNotes
+                            }
                             let newThingImageUUID = UUID().uuidString
                             newThing.imageUUID = newThingImageUUID
+                            newThing.latitude = userLatitude
+                            newThing.longitude = userLongitude
                             if moc.hasChanges {
                                 try? moc.save()
                             }
@@ -125,6 +147,13 @@ struct CreateNewThingView: View {
                 image = Image(uiImage: inputImage)
             }
             .interactiveDismissDisabled(image != nil)
+        }
+    }
+    
+    func updateLocation() {
+        if let location = self.locationFetcher.lastKnownLocation {
+            userLatitude = location.latitude
+            userLongitude = location.longitude
         }
     }
 }
