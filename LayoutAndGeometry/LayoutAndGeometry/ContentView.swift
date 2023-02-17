@@ -179,9 +179,12 @@ struct ContentView: View {
                         Text("Row #\(index)")
                             .font(.title)
                             .frame(maxWidth: .infinity)
-                            .background(colors[index % 7])
-                            .rotation3DEffect(.degrees(geo.frame(in: .global).minY - fullView.size.height / 2) / 5, axis: (x: 0, y: 1, z: 0))
+                            
+                            //.background(colors[index % 7])
+                            .background(Color(hue: min(1, geo.frame(in: .global).minY / fullView.size.height), saturation: 1, brightness: 1))
                         
+                            .rotation3DEffect(.degrees(geo.frame(in: .global).minY - fullView.size.height / 2) / 5, axis: (x: 0, y: 1, z: 0))
+                            
                             .opacity(geo.frame(in: .global).minY / 200)
                             //.opacity(geo.frame(in: .global).minY < 200 ? ( Double(geo.frame(in: .global).minY / 2) / 100 ) : 1.0) //<-- Make views near the top of the scroll view fade out to 0 opacity – I would suggest starting at about 200 points from the top.
                     
